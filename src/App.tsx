@@ -6,6 +6,7 @@ import { TheorySection } from "@/components/TheorySection";
 import { ParametersSection } from "@/components/ParametersSection";
 import { SusySection } from "@/components/SusySection";
 import { VerificationSection } from "@/components/VerificationSection";
+import { Toaster } from "@/components/ui/sonner";
 
 function App() {
   const [activeSection, setActiveSection] = useKV("active-section", "overview");
@@ -44,6 +45,7 @@ function App() {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

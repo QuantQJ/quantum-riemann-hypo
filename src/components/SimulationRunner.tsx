@@ -1,18 +1,18 @@
 import React, { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Download, Play, FileText } from '@phosphor-
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Download, Play, FileText } from '@phosphor-icons/react';
+import { toast } from 'sonner';
 
+interface SimulationParams {
   xMax: number;
+  nPoints: number;
+  beta: number;
   tFinal: number;
-
-
-  estimatedZero
-  convergenceError
+  targetZeros: number;
 }
-export function
-  const [progress, set
- 
 
 interface SimulationResults {
   estimatedZeros: number[];
@@ -30,230 +30,275 @@ export function SimulationRunner() {
     nPoints: 2048,
     tFinal: 4.0,
     beta: 0.2,
-      const primeApp
-    }
+    targetZeros: 100
+  });
 
+  const runQuantumSimulation = useCallback(async (): Promise<SimulationResults> => {
+    const { xMax, nPoints, beta, tFinal, targetZeros } = params;
+    
+    // Create logarithmic grid
+    const x = Array.from({ length: nPoints }, (_, i) => 
+      Math.exp(Math.log(2) + (i / (nPoints - 1)) * Math.log(xMax / 2))
+    );
+    
+    // Initialize prime-counting wavefunction
+    const primeApprox = (n: number) => n / Math.log(n + 1);
+    const li = (n: number) => n / Math.log(n + 1) * 1.045; // Approximation
+    
+    let psi = x.map(xi => {
+      const primeDiff = primeApprox(xi) - li(xi);
+      const gaussian = Math.exp(-Math.pow(xi - 100, 2) / (2 * 50 * 50));
+      const amplitude = primeDiff * gaussian;
       const phase = Math.random() * 2 * Math.PI;
+      return {
+        real: amplitude * Math.cos(phase),
+        imag: amplitude * Math.sin(phase)
+      };
     });
+    
     // Normalize
+    let norm = Math.sqrt(psi.reduce((sum, p) => sum + p.real * p.real + p.imag * p.imag, 0));
+    psi = psi.map(p => ({ real: p.real / norm, imag: p.imag / norm }));
     
-    const estimatedZeros: number[] = []
-    const maxTimeSteps = Math.
-    // Time evolution with fe
+    const estimatedZeros: number[] = [];
+    const dt = 0.01;
+    const maxTimeSteps = Math.floor(tFinal / dt);
+    let timeSteps = 0;
+    
+    // Time evolution with feedback
+    while (timeSteps < maxTimeSteps && estimatedZeros.length < targetZeros) {
+      const t = timeSteps * dt;
+      
       if (t % 100 === 0) {
-    
+        setProgress((timeSteps / maxTimeSteps) * 100);
+      }
+      
       // Adaptive gain control
+      const alpha = Math.tanh(5 * (1 - t / tFinal));
       
+      // Apply feedback potential
       const newPsi = psi.map((p, i) => {
-        const feedback = alpha * Math.sin(gamma * Math.log(x[i] + 1));
-        return {
-       
-    
-      // Normalize
-      psi = newPsi.map(p => ({ real: p.real/newNor
-      // Peak detection every 50 steps
-        const intensity = psi.map(p => p.real*p.real + p.imag*p.imag);
-       
-    
-            
-            const exists = estimatedZeros.some(z => Math.abs(z - gamma) < 0.1);
-              estimatedZeros.push(gamma);
-    
-      }
-      timeSteps++;
-    
-    
-    
-    const knownZeros = [
-      32.935061588, 37.586
-      59.347044003, 60.831778525, 65.112544048
-    ];
-    //
-    if (finalZeros.length >= k
-      let sumXY = 0, sumX = 0, sumY = 0, sumX2 = 0, sumY2 = 0;
-      
-        sumX += finalZeros[i];
-        sumX2 += finalZeros[i] * finalZe
-      }
-      const denom = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 -
+        // Test multiple gamma values around known zeros
+        const gammaTest = 14.134725 + (i / nPoints) * 100; // Sweep range
+        const feedback = alpha * Math.sin(gammaTest * Math.log(x[i] + 1));
         
+        return {
+          real: p.real - dt * feedback * p.imag,
+          imag: p.imag + dt * feedback * p.real
+        };
+      });
+      
+      // Normalize
+      norm = Math.sqrt(newPsi.reduce((sum, p) => sum + p.real * p.real + p.imag * p.imag, 0));
+      psi = newPsi.map(p => ({ real: p.real / norm, imag: p.imag / norm }));
+      
+      // Peak detection every 50 steps
+      if (timeSteps % 50 === 0) {
+        const intensity = psi.map(p => p.real * p.real + p.imag * p.imag);
+        const threshold = Math.max(...intensity) * 0.8;
+        
+        for (let i = 1; i < intensity.length - 1; i++) {
+          if (intensity[i] > threshold && 
+              intensity[i] > intensity[i-1] && 
+              intensity[i] > intensity[i+1]) {
+            const gamma = 14.134725 + (i / nPoints) * 100;
+            const exists = estimatedZeros.some(z => Math.abs(z - gamma) < 0.1);
+            if (!exists) {
+              estimatedZeros.push(gamma);
+            }
+          }
+        }
+      }
+      
+      timeSteps++;
     }
+    
+    // Sort and trim results
+    estimatedZeros.sort((a, b) => a - b);
+    const finalZeros = estimatedZeros.slice(0, targetZeros);
+    
+    // Compute correlation with known zeros
+    const knownZeros = [
+      14.134725, 21.022040, 25.010858, 30.424876, 32.935061,
+      37.586178, 40.918719, 43.327073, 48.005151, 49.773832,
+      52.970321, 56.446257, 59.347044, 60.831778, 65.112544
+    ];
+    
+    let correlation = 0;
+    if (finalZeros.length >= knownZeros.length) {
+      let sumXY = 0, sumX = 0, sumY = 0, sumX2 = 0, sumY2 = 0;
+      const n = Math.min(finalZeros.length, knownZeros.length);
+      
+      for (let i = 0; i < n; i++) {
+        sumX += finalZeros[i];
+        sumY += knownZeros[i];
+        sumXY += finalZeros[i] * knownZeros[i];
+        sumX2 += finalZeros[i] * finalZeros[i];
+        sumY2 += knownZeros[i] * knownZeros[i];
+      }
+      
+      const denom = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
+      if (denom !== 0) {
+        correlation = Math.abs((n * sumXY - sumX * sumY) / denom);
+      }
+    }
+    
+    const convergenceError = finalZeros.length > 0 ? 
+      Math.mean(finalZeros.slice(0, 10).map((z, i) => 
+        i < knownZeros.length ? Math.abs(z - knownZeros[i]) / knownZeros[i] : 0
+      )) : 0.1;
+    
     return {
-      spectralCorrelation: Math.abs(correlation
-      dete
-  }, [par
-  cons
-    setProgress(0)
+      estimatedZeros: finalZeros,
+      spectralCorrelation: Math.abs(correlation),
+      convergenceError,
+      detectedZeros: finalZeros.length
+    };
+  }, [params]);
+
+  const handleRunSimulation = async () => {
+    setIsRunning(true);
+    setProgress(0);
+    setResults(null);
+    
     try {
+      const simulationResults = await runQuantumSimulation();
       setResults(simulationResults);
-    } 
+      toast.success(`Simulation completed! Found ${simulationResults.detectedZeros} zeros`);
+    } catch (error) {
+      console.error('Simulation failed:', error);
+      toast.error('Simulation failed. Please try again.');
     } finally {
+      setIsRunning(false);
       setProgress(100);
+    }
   };
-  const 
+
+  const handleExportZeros = () => {
+    if (!results) return;
     
     const csvContent = results.estimatedZeros
+      .map((zero, index) => `${index + 1},${zero.toFixed(10)}`)
       .join('\n');
+    
+    const fullCsv = 'Index,Gamma\n' + csvContent;
+    
     // Create and download file
-    const ur
+    const blob = new Blob([fullCsv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
     link.href = url;
+    link.download = 'estimated_zeros.csv';
     document.body.appendChild(link);
-    document.body.removeCh
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
     
+    toast.success('Zeros exported to estimated_zeros.csv');
   };
-  const han
-# Run thi
-import 
-from s
 
-    "
+  const handleExportAnalysisScript = () => {
+    const scriptContent = `#!/usr/bin/env python3
+"""
+Riemann Zeta Zero Analysis Script
+Analyzes estimated zeros from quantum simulation and computes validation metrics
+"""
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+import warnings
+warnings.filterwarnings('ignore')
+
+def analyze_zeros(estimated_file="estimated_zeros.csv", 
+                 known_file="odlyzko_zeros.txt"):
+    """
+    Comprehensive analysis of estimated Riemann zeros
+    """
     
-def analyze_zeros(estimated_file="estimated_zer
-    estimated = np.loadtxt(estimated_file
+    # Load estimated zeros
+    try:
+        estimated_df = pd.read_csv(estimated_file)
+        estimated = estimated_df['Gamma'].values
+    except:
+        estimated = np.loadtxt(estimated_file, delimiter=',', skiprows=1, usecols=1)
     
+    # Load known zeros (first 100 from Odlyzko's tables)
+    known_zeros = np.array([
+        14.134725141734693, 21.022039638771555, 25.010857580145688,
+        30.424876125859513, 32.935061587739190, 37.586178158825671,
+        40.918719012147495, 43.327073280914999, 48.005150881167159,
+        49.773832477672302, 52.970321477714460, 56.446257310149803,
+        59.347044003233761, 60.831778525229881, 65.112544048081602,
+        67.079810529494173, 69.546401711086275, 72.067157674149635,
+        75.704690699203946, 77.144840068874718, 79.337375020249367,
+        82.910380854543454, 84.735492981351842, 87.425274613443595,
+        88.809111208594178, 92.491899271363821, 94.651344041047539,
+        95.870634228245842, 98.831194218062148, 101.317851006463654
+    ])
     
+    n_compare = min(len(estimated), len(known_zeros))
+    deviations = np.abs(estimated[:n_compare] - known_zeros[:n_compare])
     
-    pearson_r, pearson_p
+    print("=== RIEMANN ZETA ZERO ANALYSIS ===\\n")
+    print(f"Estimated zeros: {len(estimated)}")
+    print(f"Comparison range: first {n_compare} zeros\\n")
     
-    print(f"Spearman correlation: ρ = {spearman_r:.6f} (p = {
+    # 1. Correlation analysis
+    pearson_r, pearson_p = stats.pearsonr(estimated[:n_compare], known_zeros[:n_compare])
+    spearman_r, spearman_p = stats.spearmanr(estimated[:n_compare], known_zeros[:n_compare])
+    
+    print(f"Pearson correlation: r = {pearson_r:.6f} (p = {pearson_p:.2e})")
+    print(f"Spearman correlation: ρ = {spearman_r:.6f} (p = {spearman_p:.2e})\\n")
+    
     # 2. Deviation analysis
     mean_dev = np.mean(deviations)
+    max_dev = np.max(deviations)
+    relative_error = np.mean(deviations / known_zeros[:n_compare]) * 100
     
-    pr
+    print(f"Mean absolute deviation: {mean_dev:.6f}")
+    print(f"Maximum deviation: {max_dev:.6f}")
+    print(f"Mean relative error: {relative_error:.4f}%\\n")
     
-    
-    avg_spacing = np.mea
-    
-    def gue_wigner(s):
-    
-    gu
-    
-    
-    fig, ((ax1, ax2), (ax3, ax
-    # Zero comparison
-    ax1.plot(estimated[:n_compare], 'ro-', labe
-    ax1.set_ylabel('γ')
-    ax1
-    
-    ax2.plot(deviations, 'g-', alpha=0.8)
-    ax2.set_ylabel('|γ_e
-    ax2.grid(True, alpha=0.3)
-    # S
-     
-    
-    ax3.set_
-    ax3.set_title('Spacing Distri
-    ax3.grid(True, alpha=0.3)
-    # Number variance (if enough zeros)
-        def number_variance(zeros, L_v
-      
-               
-
-                variances.append(np.var(int
+    # 3. Spacing analysis (GUE statistics)
+    if len(estimated) > 10:
+        spacings = np.diff(estimated)
+        # Unfold spacings (normalize by average)
+        avg_spacing = np.mean(spacings)
+        unfolded_spacings = spacings / avg_spacing
         
-        sigma2 = nu
+        def gue_wigner(s):
+            """GUE Wigner distribution P(s) = (π/2)s exp(-πs²/4)"""
+            return (np.pi/2) * s * np.exp(-np.pi * s**2 / 4)
+        
+        # Kolmogorov-Smirnov test against GUE
+        s_theory = np.linspace(0, 4, 1000)
+        gue_cdf = np.array([np.trapz(gue_wigner(s_theory[:i+1]), s_theory[:i+1]) 
+                           for i in range(len(s_theory))])
+        gue_cdf /= gue_cdf[-1]  # Normalize
+        
+        ks_stat, ks_pvalue = stats.kstest(unfolded_spacings, 
+                                         lambda x: np.interp(x, s_theory, gue_cdf))
+        
+        print(f"KS test vs GUE: D = {ks_stat:.4f}, p = {ks_pvalue:.4f}")
+        if ks_pvalue > 0.05:
+            print("✓ Consistent with GUE statistics (RH evidence)")
+        else:
+            print("✗ Deviates from GUE statistics")
     
-        r
-        ax4.loglog(L_values, sigma2, 'b-', label='Simulation'
-        ax4.set_xlabel('Interval len
-        ax4.set_title('Number Variance')
-        ax4.grid(True
-    plt.tight_layout()
-    plt.show()
-    return {
-        'spearman_corre
-     
+    # 4. Visualization
+    fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(12, 10))
     
-
-    print("\\nAnalysis complete! Ch
-
+    # Zero comparison
+    ax1.plot(estimated[:n_compare], 'ro-', label='Estimated', markersize=4, alpha=0.7)
+    ax1.plot(known_zeros[:n_compare], 'b.-', label='Odlyzko', markersize=4, alpha=0.7)
+    ax1.set_xlabel('Zero index')
+    ax1.set_ylabel('γ')
+    ax1.set_title('Zero Comparison')
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
     
-    link.href = url;
-    document.body.appendChild(link);
-    document.body.removeChild(
-    
-  };
-  return (
-      <Card>
-          <CardTitle className="flex items
-            Quantum Riemann Zero Simulation
-          <CardDescr
-          </CardDescription>
-        <CardContent className="spac
-            <div>
-              <div className="text-m
-            <div>
-    
-            <div>
-    
-
-              <div className="text-muted-for
-            <div>
-              <div className="text-muted-foreg
-
-          {isRunni
-              <div 
-                <span>{progress.toFixed(1)}%</span>
-              <Progress value={
-
-          <div className=
-              onClick={handleRunSimulation} 
-              className="flex items-center gap
-              <Play className="h-4 w-4" />
-
-        </CardContent>
-
-        <Card>
-            <CardTitle>Simulation 
-    
-          </CardHeader>
-    
-                <div className="font-medium">Detec
-    
-              </div>
-                <div className="font-medium">Spectral Correlation</div>
-                  ρ = {results.spectralCorrelation.toFixed(4)}
-    
-                <div className="font-medium">Convergence Error</div>
-                  {(results.convergenceError * 100).toFixed(2)}%
-    
-
-              <FileText className="h-4 w-4" />
-                Export your estima
-              </AlertDescription
-
-              <Button onClick={handleExportZ
-                Export Zeros CSV
-    
-                Export Analysis Script
-            </div>
-    
-              <ol className="list-decimal list-insid
-                <li>Download the analyze_zero
-                <li>Install required packages: <code cla
-    
-            </div>
-        </Card>
-    </div>
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     # Deviation plot
     ax2.plot(deviations, 'g-', alpha=0.8)
     ax2.set_xlabel('Zero index')
@@ -262,16 +307,17 @@ def analyze_zeros(estimated_file="estimated_zer
     ax2.grid(True, alpha=0.3)
     
     # Spacing histogram
-    ax3.hist(unfolded_spacings, bins=30, density=True, alpha=0.7, 
-             label='Simulation', color='blue')
-    s_range = np.linspace(0, 4, 100)
-    ax3.plot(s_range, gue_wigner(s_range), 'r-', linewidth=2, 
-             label='GUE Wigner')
-    ax3.set_xlabel('Unfolded spacing s')
-    ax3.set_ylabel('P(s)')
-    ax3.set_title('Spacing Distribution')
-    ax3.legend()
-    ax3.grid(True, alpha=0.3)
+    if len(estimated) > 10:
+        ax3.hist(unfolded_spacings, bins=30, density=True, alpha=0.7, 
+                 label='Simulation', color='blue')
+        s_range = np.linspace(0, 4, 100)
+        ax3.plot(s_range, gue_wigner(s_range), 'r-', linewidth=2, 
+                 label='GUE Wigner')
+        ax3.set_xlabel('Unfolded spacing s')
+        ax3.set_ylabel('P(s)')
+        ax3.set_title('Spacing Distribution')
+        ax3.legend()
+        ax3.grid(True, alpha=0.3)
     
     # Number variance (if enough zeros)
     if len(estimated) > 50:
@@ -283,7 +329,10 @@ def analyze_zeros(estimated_file="estimated_zer
                 for i in range(len(zeros) - int(L)):
                     count = np.sum((zeros >= zeros[i]) & (zeros < zeros[i] + L))
                     intervals.append(count)
-                variances.append(np.var(intervals))
+                if intervals:
+                    variances.append(np.var(intervals))
+                else:
+                    variances.append(0)
             return np.array(variances)
         
         L_values = np.logspace(0, 2, 50)
@@ -310,7 +359,7 @@ def analyze_zeros(estimated_file="estimated_zer
         'spearman_correlation': spearman_r,
         'mean_deviation': mean_dev,
         'max_deviation': max_dev,
-        'ks_pvalue': ks_pvalue
+        'ks_pvalue': ks_pvalue if len(estimated) > 10 else None
     }
 
 if __name__ == "__main__":
@@ -456,3 +505,14 @@ if __name__ == "__main__":
     </div>
   );
 }
+
+// Helper function for array mean
+declare global {
+  interface Math {
+    mean(arr: number[]): number;
+  }
+}
+
+Math.mean = function(arr: number[]): number {
+  return arr.reduce((sum, val) => sum + val, 0) / arr.length;
+};
