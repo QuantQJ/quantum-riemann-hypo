@@ -1,11 +1,11 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-interface ErrorFallbackProps {
+import { AlertTriangle } from "@phosphor-icons/react";
 
 interface ErrorFallbackProps {
-  return (
-      <div className="max-w-md w-
- 
+  error: Error;
+  resetErrorBoundary: () => void;
+}
 
 export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
   return (
@@ -16,13 +16,13 @@ export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps)
           <AlertDescription className="mt-2">
             Something went wrong. Please try refreshing the page.
             <div className="mt-4">
-
+              <Button onClick={resetErrorBoundary} variant="outline">
                 Try again
               </Button>
             </div>
-
+          </AlertDescription>
         </Alert>
-
+      </div>
     </div>
-
+  );
 }
