@@ -1,11 +1,11 @@
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { AlertTriangle, RefreshCw } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
-
 interface ErrorFallbackProps {
-  error: Error;
-  resetErrorBoundary: () => void;
-}
+
+
+  return (
+      <div className="max-w-md w-
+ 
 
 export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
   return (
@@ -16,14 +16,13 @@ export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps)
           <AlertTitle>Something went wrong</AlertTitle>
           <AlertDescription>
             An unexpected error occurred. Please try again or refresh the page.
-          </AlertDescription>
-        </Alert>
-        
-        <Button onClick={resetErrorBoundary} className="w-full">
-          <RefreshCw className="mr-2 h-4 w-4" />
-          Try again
-        </Button>
-      </div>
-    </div>
-  );
-}
+
+
+
+
+
+
+
+
+
+
