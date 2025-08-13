@@ -1,14 +1,14 @@
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
+import { AlertTriangle } from "@phosphor-icons/r
 import { AlertTriangle } from "@phosphor-icons/react";
 
-interface ErrorFallbackProps {
+  resetErrorBoundary: () => vo
   error: Error;
   resetErrorBoundary: () => void;
 }
 
 export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
-  return (
+          
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <Alert variant="destructive">
@@ -16,25 +16,24 @@ export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps)
           <AlertDescription>
             Something went wrong. Please try refreshing the page.
           </AlertDescription>
-        </Alert>
-        
-        <div className="mt-4 space-y-2">
-          <Button onClick={resetErrorBoundary} className="w-full">
-            Try Again
-          </Button>
-        </div>
-
-        {process.env.NODE_ENV === 'development' && (
-          <details className="mt-4">
-            <summary className="cursor-pointer text-sm text-muted-foreground">
-              Error Details (Development)
-            </summary>
-            <pre className="mt-2 text-xs bg-muted p-2 rounded overflow-auto">
-              {error.stack}
-            </pre>
-          </details>
-        )}
       </div>
-    </div>
   );
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
