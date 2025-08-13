@@ -1,11 +1,11 @@
-import { Alert, AlertTitle, AlertDescription } from "./components/ui/alert";
-import { AlertTriangle, RefreshCw } from "lucide
-import { AlertTriangle, RefreshCw } from "lucide-react";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { AlertTriangle, RefreshCw } from "@phosphor-icons/react";
 
-
-  // When encou
-  if (import.meta.env.DEV) throw 
- 
+interface ErrorFallbackProps {
+  error: Error;
+  resetErrorBoundary: () => void;
+}
 
 export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
   // When encountering an error in the development mode, rethrow it and don't display the boundary.
@@ -16,11 +16,11 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps)
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <Alert variant="destructive" className="mb-6">
-          <pre className="text-
+          <AlertTriangle className="h-4 w-4" />
           <AlertTitle>This spark has encountered a runtime error</AlertTitle>
-        </div>
+          <AlertDescription>
             Something unexpected happened while running the application. The error details are shown below. Contact the spark author and let them know about this issue.
-          onClick={resetError
+          </AlertDescription>
         </Alert>
         
         <div className="bg-card border rounded-lg p-4 mb-6">
@@ -28,17 +28,17 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps)
           <pre className="text-xs text-destructive bg-muted/50 p-3 rounded border overflow-auto max-h-32">
             {error.message}
           </pre>
+        </div>
 
-        
-
+        <Button 
           onClick={resetErrorBoundary} 
-
+          className="w-full"
           variant="outline"
-
-          <RefreshCwIcon />
-
+        >
+          <RefreshCw className="h-4 w-4 mr-2" />
+          Try Again
         </Button>
-
+      </div>
     </div>
-
-}
+  );
+};
