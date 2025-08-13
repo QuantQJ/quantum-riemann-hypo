@@ -61,7 +61,7 @@ export function OverviewSection() {
             of a Hermitian operator, we construct an effective Hamiltonian:
           </p>
           <div className="mathematical-content">
-            H_eff = -ℏ²/(2m)∇² + V_feedback(ψ, {γₖ})
+            H_eff = -ℏ²/(2m)∇² + V_feedback(ψ, &#123;γₖ&#125;)
             <br /><br />
             V_feedback = α(t) Σₖ λₖ Im(⟨e^(iγₖ ln x)|ψ⟩/|⟨e^(iγₖ ln x)|ψ⟩| e^(-iφₖ)) Re(e^(iγₖ ln x))
           </div>
