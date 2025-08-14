@@ -144,9 +144,9 @@ export function SimulationRunner() {
     }
     
     const convergenceError = finalZeros.length > 0 ? 
-      Math.mean(finalZeros.slice(0, 10).map((z, i) => 
+      finalZeros.slice(0, 10).map((z, i) => 
         i < knownZeros.length ? Math.abs(z - knownZeros[i]) / knownZeros[i] : 0
-      )) : 0.1;
+      ).reduce((sum, val) => sum + val, 0) / Math.min(finalZeros.length, 10) : 0.1;
     
     return {
       estimatedZeros: finalZeros,
@@ -506,13 +506,4 @@ if __name__ == "__main__":
   );
 }
 
-// Helper function for array mean
-declare global {
-  interface Math {
-    mean(arr: number[]): number;
-  }
-}
-
-Math.mean = function(arr: number[]): number {
-  return arr.reduce((sum, val) => sum + val, 0) / arr.length;
-};
+// Remove global Math extension since we're using inline calculation
