@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lightning, FlaskConical, Target, TrendUp, CheckCircle, AlertTriangle } from "@phosphor-icons/react";
+import { Zap, FlaskConical, Target, TrendingUp, CheckCircle, AlertTriangle } from "@phosphor-icons/react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
 import { MathJax, MathJaxContext } from '@/components/MathJax';
 import { useState, useEffect } from 'react';
@@ -100,7 +100,7 @@ export function SusySection() {
       return {
         status: 'Unbroken SUSY',
         color: 'bg-blue-500',
-        icon: <Lightning size={16} />,
+        icon: <Zap size={16} />,
         description: 'Witten Index Δ ≈ 0: SUSY preserved'
       };
     } else {
@@ -134,11 +134,11 @@ export function SusySection() {
               Potentials
             </TabsTrigger>
             <TabsTrigger value="mirroring" className="flex items-center gap-1">
-              <TrendUp size={14} />
+              <TrendingUp size={14} />
               Mirroring
             </TabsTrigger>
             <TabsTrigger value="witten" className="flex items-center gap-1">
-              <Lightning size={14} />
+              <Zap size={14} />
               Witten Index
             </TabsTrigger>
           </TabsList>
@@ -335,7 +335,7 @@ export function SusySection() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendUp size={20} />
+                  <TrendingUp size={20} />
                   Spectral Mirroring Analysis
                 </CardTitle>
               </CardHeader>
@@ -449,7 +449,7 @@ export function SusySection() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Lightning size={20} />
+                  <Zap size={20} />
                   Witten Index Calculation
                 </CardTitle>
               </CardHeader>
@@ -555,7 +555,7 @@ export function SusySection() {
                 </div>
 
                 <Alert>
-                  <Lightning className="h-4 w-4" />
+                  <Zap className="h-4 w-4" />
                   <AlertDescription>
                     <strong>Topological Protection:</strong> The near-zero Witten index (Δ ≈ 0) suggests 
                     topological protection of the zeta zero spectrum against perturbations, providing a 

@@ -262,20 +262,6 @@ button, .button {
       transparent 100%);
   }
 }
-  /* Add a visual separator between navigation and content */
-  .navigation-container::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      oklch(0.88 0.01 240) 50%, 
-      transparent 100%);
-  }
-}
 
 /* Fix spacing for larger screens to prevent overlap */
 @media (min-width: 1024px) {

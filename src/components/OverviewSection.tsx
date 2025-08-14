@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Atom, Calculator, TrendUp, Lightning, CheckCircle, Target } from "@phosphor-icons/react";
+import { Atom, Calculator, TrendingUp, Zap, CheckCircle, Target } from "@phosphor-icons/react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
 
 const demoResults = [
@@ -18,14 +18,14 @@ const keyFindings = [
     title: "Spectral Tautology",
     value: "ρ = 0.999",
     description: "Gödelian loop: zeros define spectrum that locates zeros",
-    icon: <TrendUp size={20} />,
+    icon: <TrendingUp size={20} />,
     color: "text-primary"
   },
   {
     title: "SUSY Preservation",
     value: "Δ ≈ 0",
     description: "Witten index confirms unbroken supersymmetry",
-    icon: <Lightning size={20} />,
+    icon: <Zap size={20} />,
     color: "text-blue-600"
   },
   {
@@ -105,7 +105,7 @@ export function OverviewSection({ onSectionChange }: OverviewSectionProps = {}) 
             Prime Dynamics  
           </Badge>
           <Badge variant="outline" className="flex items-center gap-1">
-            <Lightning size={14} />
+            <Zap size={14} />
             SUSY QM
           </Badge>
           <Badge className="bg-accent text-accent-foreground">
@@ -363,14 +363,14 @@ export function OverviewSection({ onSectionChange }: OverviewSectionProps = {}) 
               </div>
             </Button>
             <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('parameters')}>
-              <TrendUp className="mr-2" size={16} />
+              <TrendingUp className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">Parameters</div>
                 <div className="text-xs text-muted-foreground">Contraction bounds</div>
               </div>
             </Button>
             <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('susy')}>
-              <Lightning className="mr-2" size={16} />
+              <Zap className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">SUSY</div>
                 <div className="text-xs text-muted-foreground">Witten index</div>

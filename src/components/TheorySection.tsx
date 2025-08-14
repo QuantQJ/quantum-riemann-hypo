@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MathJax, MathJaxContext } from '@/components/MathJax';
-import { BookOpen, Target, Lightning, CheckCircle } from "@phosphor-icons/react";
+import { BookOpen, Target, Zap, CheckCircle } from "@phosphor-icons/react";
 
 const mathJaxConfig = {
   loader: { load: ["[tex]/html"] },
@@ -41,7 +41,7 @@ export function TheorySection() {
               Theorem 3
             </TabsTrigger>
             <TabsTrigger value="theorem4" className="flex items-center gap-2">
-              <Lightning size={16} />
+              <Zap size={16} />
               Theorem 4
             </TabsTrigger>
           </TabsList>
@@ -214,7 +214,7 @@ export function TheorySection() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Lightning size={20} />
+                  <Zap size={20} />
                   Theorem 4: Universal Convergence (Fixed-Point)
                   <Badge className="bg-blue-600 text-white">Kantorovich</Badge>
                 </CardTitle>
