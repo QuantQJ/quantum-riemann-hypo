@@ -18,11 +18,11 @@ export function ParametersSection() {
     { beta: 0.05, rho: 0.992, avgError: 0.18, detectedZeros: 95 },
     { beta: 0.1, rho: 0.997, avgError: 0.12, detectedZeros: 98 },
     { beta: 0.2, rho: 0.999, avgError: 0.06, detectedZeros: 100 },
-    { beta: 0.3, rho: 0.996, avgError: 0.15, detectedZeros: 96 },
     { beta: 0.4, rho: 0.989, avgError: 0.25, detectedZeros: 85 },
     { beta: 0.5, rho: 0.974, avgError: 0.42, detectedZeros: 70 }
   ];
 
+  const tFinalResults = [
   const tFinalResults = [
     { tFinal: 1.5, rho: 0.983, maxZero: 190, convergence: 0.098 },
     { tFinal: 2.0, rho: 0.992, maxZero: 210, convergence: 0.062 },
@@ -31,11 +31,11 @@ export function ParametersSection() {
     { tFinal: 3.5, rho: 0.999, maxZero: 236, convergence: 0.028 },
     { tFinal: 4.0, rho: 0.999, maxZero: 236, convergence: 0.025 }
   ];
-
   // Interpolate simulation results based on current parameter values
   const calculateSimulationMetrics = (beta: number, tFinal: number) => {
-    // Beta interpolation
+    // Beta interpolation (beta: number, tFinal: number) => {
     const betaClosest = betaResults.reduce((prev, curr) =>
+      Math.abs(curr.beta - beta) < Math.abs(prev.beta - beta) ? curr : prev
       Math.abs(curr.beta - beta) < Math.abs(prev.beta - beta) ? curr : prev
     );
     
@@ -79,33 +79,28 @@ export function ParametersSection() {
   };
 
   const currentMetrics = simulationResults || calculateSimulationMetrics(beta, tFinal);
-
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-primary mb-4">Parameter Analysis</h1>
-        <p className="text-muted-foreground text-lg">
-          Systematic exploration of simulation parameters and optimization results
-        </p>
+      <div>assName="space-y-8">
       </div>
 
       <Tabs defaultValue="interactive" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="interactive">Interactive Simulation</TabsTrigger>
           <TabsTrigger value="beta">Beta Sweep</TabsTrigger>
-          <TabsTrigger value="tfinal">T_final Analysis</TabsTrigger>
-          <TabsTrigger value="optimal">Optimal Ranges</TabsTrigger>
-        </TabsList>
+      <Tabs defaultValue="interactive" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="interactive">Interactive Simulation</TabsTrigger>
 
+        <TabsContent value="interactive" className="space-y-6">
+          <Card className="p-6">
+        </TabsList>emibold mb-4">Interactive Parameter Testing</h2>
+sName="text-muted-foreground mb-6">
         <TabsContent value="interactive" className="space-y-6">
           <Card className="p-6">
             <h2 className="text-xl font-semibold mb-4">Interactive Parameter Testing</h2>
             <p className="text-muted-foreground mb-6">
               Adjust beta and T_final parameters to see their real-time effects on simulation performance
-            </p>
-
-            <div className="grid lg:grid-cols-2 gap-8">
-              {/* Parameter Controls */}
               <div className="space-y-6">
                 <div>
                   <div className="flex justify-between items-center mb-3">
