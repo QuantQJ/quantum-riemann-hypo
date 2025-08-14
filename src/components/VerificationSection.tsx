@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, AlertCircle, ChartLine } from "@phosphor-icons/react";
+import { CheckCircle, AlertCircle, ChartLine, AlertTriangle } from "@phosphor-icons/react";
 import { SimulationRunner } from "@/components/SimulationRunner";
 
 export function VerificationSection() {
@@ -23,7 +23,7 @@ export function VerificationSection() {
     { 
       metric: "GUE KS Test (p-value)", 
       value: "0.78", 
-      rhPrediction: ">0.05", 
+      rhPrediction: "{'>'}0.05", 
       status: "excellent",
       description: "Strong evidence for Gaussian Unitary Ensemble statistics"
     },
@@ -36,8 +36,8 @@ export function VerificationSection() {
     },
     { 
       metric: "Weyl's Law Deviation", 
-      value: "<1%", 
-      rhPrediction: "<1%", 
+      value: "{'<'}1%", 
+      rhPrediction: "{'<'}1%", 
       status: "excellent",
       description: "Zero counting function matches theoretical asymptotics"
     }
@@ -238,7 +238,7 @@ export function VerificationSection() {
               <h3 className="font-semibold text-primary mb-2">Falsifiability Criteria</h3>
               <ul className="text-sm space-y-1">
                 <li>• <strong>Null Hypothesis:</strong> Random initial states should NOT converge to zeta zeros</li>
-                <li>• <strong>Success Threshold:</strong> Correlation ρ > 0.999 required for validation</li>
+                <li>• <strong>Success Threshold:</strong> Correlation ρ {'>'}  0.999 required for validation</li>
                 <li>• <strong>Prime Dependency:</strong> Method fails without prime-counting structure</li>
                 <li>• <strong>Statistical Power:</strong> Controls show clear failure modes (ρ ≈ 0.78)</li>
               </ul>
@@ -297,7 +297,7 @@ export function VerificationSection() {
                         <span className="font-mono text-green-600">ρ = 0.99996 ✓</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Truncated (x&lt;50):</span>
+                        <span>Truncated (x{'<'}50):</span>
                         <span className="font-mono text-green-600">ρ = 0.99992 ✓</span>
                       </div>
                     </div>
@@ -363,7 +363,7 @@ export function VerificationSection() {
                   <h4 className="font-medium text-accent mb-2">Falsifiability Criteria ✓</h4>
                   <ul className="text-sm space-y-1">
                     <li>• Clear null hypothesis (random → failure)</li>
-                    <li>• Quantitative success threshold (ρ > 0.999)</li>
+                    <li>• Quantitative success threshold (ρ {'>'}  0.999)</li>
                     <li>• Independent validation possible</li>
                     <li>• Statistical controls implemented</li>
                   </ul>
@@ -475,7 +475,7 @@ export function VerificationSection() {
             
             <div className="mt-4 text-xs text-muted-foreground">
               <strong>Predictive Validation Protocol:</strong> All predicted zeros satisfy Re(s) = 0.5 
-              within δ &lt; 10⁻⁷ and maintain GUE spacing statistics (p = 0.427).
+              within δ {'<'} 10⁻⁷ and maintain GUE spacing statistics (p = 0.427).
             </div>
           </div>
 
