@@ -494,6 +494,7 @@ export function ParametersSection() {
             </div>
           </div>
         </CardContent>
+      </Card>
         </TabsContent>
 
         <TabsContent value="rigorous">
