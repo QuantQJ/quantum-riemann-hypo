@@ -455,11 +455,46 @@ export function AboutSection() {
           </TabsContent>
 
           <TabsContent value="about" className="space-y-6">
+            <Card className="quantum-gradient">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="h-16 w-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold">
+                    JS
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-2xl mb-2">Hello, my name is James</CardTitle>
+                    <p className="text-muted-foreground">
+                      Researcher in Quantum Mathematics and Number Theory
+                    </p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-base leading-relaxed">
+                  I've been working on some fascinating thoughts about the connection between quantum mechanics 
+                  and the Riemann Hypothesis. This research represents years of exploration into how quantum 
+                  systems might naturally encode the deepest mysteries of prime numbers.
+                </p>
+                <p className="text-base leading-relaxed">
+                  What started as curiosity about spectral theory has evolved into a comprehensive framework 
+                  that bridges abstract mathematics with physical quantum systems. The idea that the Riemann 
+                  zeros might emerge as natural resonances in quantum Hamiltonians has profound implications 
+                  for both number theory and quantum physics.
+                </p>
+                <div className="mt-6 p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
+                  <p className="text-sm italic text-muted-foreground">
+                    "The most beautiful thing we can experience is the mysterious. It is the source of all true art and science." 
+                    <span className="font-medium">— Albert Einstein</span>
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Users size={20} />
-                  About This Research
+                  Research Background
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">

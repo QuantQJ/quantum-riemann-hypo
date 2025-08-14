@@ -59,8 +59,8 @@ button, .button {
 }
 
 :root {
-  /* Quantum-inspired color scheme with improved backgrounds */
-  --background: oklch(0.98 0.01 240);
+  /* Clean, professional color scheme with subtle quantum inspiration */
+  --background: oklch(0.995 0.003 240);
   --foreground: oklch(0.15 0.05 240);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.12 0.02 240);
@@ -68,16 +68,16 @@ button, .button {
   --popover-foreground: oklch(0.12 0.02 240);
   --primary: oklch(0.25 0.15 260); /* Deep quantum blue */
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.94 0.02 240);
+  --secondary: oklch(0.96 0.01 240);
   --secondary-foreground: oklch(0.25 0.05 240);
-  --muted: oklch(0.96 0.01 240);
+  --muted: oklch(0.97 0.008 240);
   --muted-foreground: oklch(0.45 0.02 240);
   --accent: oklch(0.65 0.25 35); /* Scientific gold */
   --accent-foreground: oklch(0.15 0.05 240);
   --destructive: oklch(0.55 0.2 15);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.88 0.01 240);
-  --input: oklch(0.88 0.01 240);
+  --border: oklch(0.92 0.005 240);
+  --input: oklch(0.92 0.005 240);
   --ring: oklch(0.25 0.15 260);
   --radius: 0.5rem;
 
@@ -85,11 +85,11 @@ button, .button {
   --scientific-purple: oklch(0.3 0.15 290);
   --scientific-purple-foreground: oklch(1 0 0);
   
-  /* Enhanced quantum gradient variables */
-  --quantum-gradient-1: oklch(0.98 0.01 240);
-  --quantum-gradient-2: oklch(0.96 0.02 260);
-  --quantum-gradient-3: oklch(0.98 0.01 280);
-  --quantum-gradient-4: oklch(0.95 0.03 300);
+  /* Very subtle gradient variables */
+  --quantum-gradient-1: oklch(0.998 0.002 240);
+  --quantum-gradient-2: oklch(0.996 0.004 260);
+  --quantum-gradient-3: oklch(0.998 0.002 280);
+  --quantum-gradient-4: oklch(0.996 0.005 300);
 }
 
 @theme {
@@ -368,7 +368,7 @@ button, .button {
   z-index: 1;
 }
 
-/* Enhanced quantum gradient backgrounds for special cards */
+/* Enhanced quantum gradient backgrounds for special cards - now very subtle */
 .quantum-gradient {
   background: linear-gradient(135deg, 
     var(--quantum-gradient-1) 0%,
@@ -376,28 +376,29 @@ button, .button {
     var(--quantum-gradient-3) 75%,
     var(--quantum-gradient-4) 100%
   );
-  border: 1px solid oklch(0.9 0.02 260 / 0.3);
-  box-shadow: 0 4px 20px oklch(0.25 0.15 260 / 0.05);
+  border: 1px solid oklch(0.9 0.01 260 / 0.2);
+  box-shadow: 0 2px 8px oklch(0.25 0.15 260 / 0.03);
 }
 
 .quantum-gradient-alt {
   background: linear-gradient(45deg, 
-    oklch(0.98 0.01 240) 0%,
-    oklch(0.97 0.02 250) 20%,
-    oklch(0.96 0.03 270) 40%,
-    oklch(0.97 0.02 290) 60%,
-    oklch(0.98 0.01 310) 80%,
-    oklch(0.98 0.01 240) 100%
+    oklch(0.998 0.002 240) 0%,
+    oklch(0.996 0.003 250) 20%,
+    oklch(0.995 0.004 270) 40%,
+    oklch(0.997 0.003 290) 60%,
+    oklch(0.998 0.002 310) 80%,
+    oklch(0.998 0.001 240) 100%
   );
-  border: 1px solid oklch(0.88 0.02 260 / 0.4);
+  border: 1px solid oklch(0.88 0.01 260 / 0.3);
 }
 
 .research-gradient {
-  background: linear-gradient(120deg, 
-    oklch(0.98 0.01 240) 0%,
-    oklch(0.96 0.03 260) 30%,
-    oklch(0.95 0.04 280) 60%,
-    oklch(0.97 0.02 300) 100%
+  background: linear-gradient(135deg, 
+    oklch(0.998 0.002 240) 0%,
+    oklch(0.996 0.003 260) 25%,
+    oklch(0.995 0.004 280) 50%,
+    oklch(0.997 0.002 300) 75%,
+    oklch(0.998 0.001 320) 100%
   );
   position: relative;
   overflow: hidden;
@@ -411,33 +412,33 @@ button, .button {
   right: 0;
   bottom: 0;
   background: linear-gradient(
-    45deg,
+    120deg,
     transparent 0%,
-    oklch(0.25 0.15 260 / 0.02) 25%,
+    oklch(0.25 0.15 260 / 0.005) 35%,
     transparent 50%,
-    oklch(0.65 0.25 35 / 0.03) 75%,
+    oklch(0.65 0.25 35 / 0.008) 85%,
     transparent 100%
   );
   pointer-events: none;
-  animation: subtle-shift 20s ease-in-out infinite;
+  animation: subtle-shift 40s ease-in-out infinite;
 }
 
 @keyframes subtle-shift {
   0%, 100% {
-    opacity: 0.5;
-    transform: translateX(0) translateY(0);
+    opacity: 0.2;
+    transform: translateX(0) translateY(0) scale(1);
   }
   25% {
-    opacity: 0.3;
-    transform: translateX(10px) translateY(-5px);
+    opacity: 0.1;
+    transform: translateX(3px) translateY(-2px) scale(1.002);
   }
   50% {
-    opacity: 0.7;
-    transform: translateX(-5px) translateY(10px);
+    opacity: 0.25;
+    transform: translateX(-2px) translateY(3px) scale(0.998);
   }
   75% {
-    opacity: 0.4;
-    transform: translateX(-10px) translateY(-5px);
+    opacity: 0.15;
+    transform: translateX(-3px) translateY(-2px) scale(1.001);
   }
 }
 
