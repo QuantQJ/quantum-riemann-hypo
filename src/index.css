@@ -76,6 +76,7 @@
   --radius-full: 9999px;
 }
 
+/* Mathematical typography enhancements */
 .mathematical-content {
   font-family: 'JetBrains Mono', 'Consolas', monospace;
   font-size: 14px;
@@ -100,6 +101,32 @@
     oklch(0.3 0.15 290)
   );
   border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+/* Enhanced prose styling */
+.prose {
+  max-width: none;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose em {
+  font-style: italic;
+  color: oklch(0.3 0.15 290);
+}
+
+/* Spectral tautology emphasis */
+.spectral-emphasis {
+  background: linear-gradient(135deg, 
+    oklch(0.25 0.15 260 / 0.1),
+    oklch(0.3 0.15 290 / 0.15),
+    oklch(0.65 0.25 35 / 0.1)
+  );
+  border: 1px solid oklch(0.25 0.15 260 / 0.2);
+  border-radius: var(--radius);
+  padding: 1rem;
 }
 
 .section-transition {
