@@ -1,76 +1,84 @@
-# Quantum Riemann Research Platform - PRD
+# Quantum Riemann Research Interface - Product Requirements Document
 
 ## Core Purpose & Success
-
-**Mission Statement**: Create an interactive platform for exploring the quantum mechanical approach to the Riemann Hypothesis through parameter validation and theoretical analysis.
-
-**Success Indicators**: 
-- Users can interactively explore parameter space effects on convergence
-- Theoretical proofs are presented with rigorous mathematical validation
-- Real-time visualization of spectral correlations and SUSY properties
-
-**Experience Qualities**: Rigorous, Interactive, Educational
+- **Mission Statement**: Create an interactive interface for exploring quantum simulation of Riemann zeta zeros via feedback Hamiltonian control and SUSY QM
+- **Success Indicators**: Researchers can validate theoretical frameworks, adjust parameters, and visualize convergence patterns
+- **Experience Qualities**: Rigorous, Interactive, Educational
 
 ## Project Classification & Approach
-
-**Complexity Level**: Complex Application (advanced mathematical functionality, interactive controls, real-time computation)
-
-**Primary User Activity**: Interacting (with mathematical parameters) and Analyzing (theoretical frameworks)
+- **Complexity Level**: Complex Application (advanced mathematical functionality, multiple interactive features)
+- **Primary User Activity**: Interacting with mathematical models, validating theoretical predictions, parameter exploration
+- **Core Problem Analysis**: Making advanced quantum number theory accessible through interactive visualization
+- **User Context**: Academic researchers, physicists, mathematicians exploring connections between quantum mechanics and number theory
 
 ## Essential Features
 
-### Interactive Parameter Exploration
-- Real-time sliders for β (feedback strength) and T_final (evolution time) 
-- Live updates of convergence metrics and spectral correlation
-- Visual feedback on contraction mapping behavior
+### 1. Theoretical Framework Explorer
+- **Functionality**: Interactive display of the three main theorems with mathematical derivations
+- **Purpose**: Educational visualization of quantum resonance convergence, feedback stability, and fixed-point theorems
+- **Success Criteria**: Mathematical expressions render correctly with LaTeX, proofs are navigable
 
-### Rigorous Theoretical Framework
-- Complete proofs of Theorems 2, 3, and 4 with mathematical rigor
-- SUSY QM integration showing spectral mirroring
-- Validation framework with falsifiability criteria
+### 2. Parameter Space Validation
+- **Functionality**: Interactive sliders for α, β, T_final with real-time computation of Λ(α,β) contraction factor
+- **Purpose**: Validate theoretical predictions about parameter windows for convergence
+- **Success Criteria**: Parameter changes update visualizations within 100ms, contraction bounds are accurate
 
-### Verification Dashboard
-- Parameter sweep results with statistical significance
-- Null hypothesis testing with random initial conditions
-- Unknown region predictions beyond computed zeros
+### 3. SUSY QM Integration Display
+- **Functionality**: Visualization of superpotential W(x), partner potentials V_±, and Witten index computation
+- **Purpose**: Demonstrate supersymmetric structure underlying zeta zero simulation
+- **Success Criteria**: SUSY properties computed correctly, spectral mirroring displayed
+
+### 4. Validation & Verification Tools
+- **Functionality**: Compare simulation results with known Riemann zeros, statistical validation
+- **Purpose**: Provide empirical verification of theoretical framework
+- **Success Criteria**: Error metrics < 0.1%, statistical tests pass with p > 0.05
 
 ## Design Direction
 
 ### Visual Tone & Identity
-**Emotional Response**: Users should feel the profound mathematical beauty and rigor of the approach
-**Design Personality**: Academic elegance with modern interactivity
-**Visual Metaphors**: Quantum wavefunction visualization, spectral analysis, mathematical precision
+- **Emotional Response**: Scientific precision, intellectual rigor, discovery
+- **Design Personality**: Clean, academic, sophisticated with quantum-inspired aesthetics
+- **Visual Metaphors**: Wave functions, quantum resonances, mathematical elegance
+- **Simplicity Spectrum**: Rich interface serving complex mathematical content
 
 ### Color Strategy
-**Color Scheme Type**: Analogous (deep blues to purples reflecting quantum themes)
-**Primary Color**: Deep quantum blue (#1a237e) - representing the mathematical foundation
-**Secondary Colors**: Scientific purple (#4a148c) for theoretical sections, accent gold (#ff6f00) for interactive elements
-**Foreground/Background Pairings**: 
-- White text on primary blue (contrast ratio 8.2:1)
-- Dark blue text on white background (contrast ratio 12.8:1)
-- Gold accent on dark backgrounds (contrast ratio 5.1:1)
+- **Color Scheme Type**: Analogous (blue-purple spectrum for quantum theme)
+- **Primary Color**: Deep quantum blue (oklch(0.25 0.15 260)) - represents fundamental quantum nature
+- **Secondary Colors**: Scientific purple (oklch(0.3 0.15 290)) for theoretical sections
+- **Accent Color**: Scientific gold (oklch(0.65 0.25 35)) for highlighting key results and optimal parameters
+- **Color Psychology**: Blue conveys trust and depth, purple suggests advanced theory, gold indicates valuable insights
+- **Accessibility**: All color combinations meet WCAG AA standards (4.5:1 contrast ratio)
 
 ### Typography System
-**Font Pairing Strategy**: Inter for clarity and JetBrains Mono for mathematical content
-**Typographic Hierarchy**: Clear distinction between theoretical exposition, parameter controls, and results
-**Which fonts**: Inter (main interface), JetBrains Mono (mathematical expressions)
+- **Font Pairing Strategy**: Inter for UI text, JetBrains Mono for mathematical expressions
+- **Typographic Hierarchy**: Clear distinction between headings, body text, mathematical notation
+- **Font Personality**: Inter: modern, readable, professional; JetBrains Mono: precise, mathematical
+- **Which fonts**: Inter (400, 500, 600, 700 weights), JetBrains Mono (400, 500 weights)
+- **Legibility Check**: Both fonts tested at minimum 14px size, excellent readability
 
 ### Visual Hierarchy & Layout
-**Attention Direction**: Theory → Parameters → Results → Verification
-**Grid System**: 4-column layout with sticky navigation
-**Responsive Approach**: Collapsible sections for mobile, full exploration on desktop
+- **Attention Direction**: Navigation sidebar → main content → interactive controls → results
+- **White Space Philosophy**: Generous spacing around mathematical expressions, breathing room for complex content
+- **Grid System**: 12-column responsive grid with sidebar navigation
+- **Responsive Approach**: Sidebar collapses on mobile, mathematical content remains readable
+- **Content Density**: Balanced - complex information presented clearly without overwhelming
 
 ### Animations
-**Purposeful Meaning**: Smooth transitions between parameter changes reflect mathematical continuity
-**Hierarchy of Movement**: Parameter changes trigger cascading visual updates
+- **Purposeful Meaning**: Smooth transitions between sections reflect quantum state evolution
+- **Hierarchy of Movement**: Section transitions (300ms) > parameter updates (150ms) > hover effects (100ms)
+- **Contextual Appropriateness**: Subtle, professional animations that enhance rather than distract
 
 ### UI Elements & Component Selection
-**Component Usage**: Cards for theoretical sections, Sliders for parameters, Charts for results
-**Component States**: Active/inactive parameter regions, convergence/divergence indicators
-**Spacing System**: Generous whitespace around complex mathematical content
+- **Component Usage**: Shadcn/ui components for consistency - Cards for content sections, Sliders for parameters, Charts for data
+- **Component Customization**: Scientific color palette, quantum-inspired gradients for special elements
+- **Component States**: Interactive elements have clear hover, focus, and active states
+- **Icon Selection**: Phosphor icons for navigation and controls
+- **Spacing System**: Consistent 8px base unit, larger spacing (16px+) for mathematical content
 
 ## Implementation Considerations
+- **Scalability Needs**: Modular component structure for adding new theoretical sections
+- **Testing Focus**: Mathematical accuracy of computations, parameter validation
+- **Critical Questions**: How to make complex mathematics accessible without oversimplification?
 
-**Scalability Needs**: Framework for additional mathematical theorems and validations
-**Testing Focus**: Parameter boundary conditions and mathematical accuracy
-**Critical Questions**: How to balance mathematical rigor with interactive accessibility
+## Reflection
+This approach uniquely combines rigorous mathematical theory with interactive visualization, making advanced quantum number theory research accessible and verifiable. The design supports both educational exploration and serious research validation.
