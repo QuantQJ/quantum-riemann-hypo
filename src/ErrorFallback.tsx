@@ -1,6 +1,5 @@
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "@phosphor-icons/react";
+import { Button } from "@/components/ui/button";
 
 interface ErrorFallbackProps {
   error: Error;
@@ -8,30 +7,29 @@ interface ErrorFallbackProps {
 }
 
 export function ErrorFallback({ error, resetErrorBoundary }: ErrorFallbackProps) {
-  console.error('Application error:', error);
-  
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
-        <Alert variant="destructive">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertDescription className="mt-2">
-            Something went wrong. Please try refreshing the page.
-            {process.env.NODE_ENV === 'development' && (
-              <details className="mt-2 text-xs">
-                <summary>Error details (development)</summary>
-                <pre className="mt-1 text-xs overflow-auto">
-                  {error.message}
-                </pre>
-              </details>
-            )}
-            <div className="mt-4">
-              <Button onClick={resetErrorBoundary} variant="outline">
-                Try again
-              </Button>
-            </div>
-          </AlertDescription>
-        </Alert>
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className="max-w-md w-full text-center space-y-4">
+        <div className="flex justify-center">
+          <AlertTriangle className="w-16 h-16 text-destructive" />
+        </div>
+        <h1 className="text-2xl font-bold text-foreground">
+          Something went wrong
+        </h1>
+        <p className="text-muted-foreground">
+          An error occurred while rendering the quantum research interface.
+        </p>
+        <details className="text-left bg-card border rounded-lg p-4">
+          <summary className="cursor-pointer font-medium mb-2">
+            Error details
+          </summary>
+          <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
+            {error.message}
+          </pre>
+        </details>
+        <Button onClick={resetErrorBoundary} className="w-full">
+          Try again
+        </Button>
       </div>
     </div>
   );
