@@ -1,4 +1,4 @@
-import { ChevronRight, Calculator, BarChart, CheckCircle, BookOpen } from "@phosphor-icons/react";
+import { ChevronRight, Calculator, BarChart, CheckCircle, BookOpen, Eye, Function, FlaskConical, Info } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -29,7 +29,7 @@ const sections = [
   {
     id: "susy",
     title: "SUSY Integration",
-    icon: Calculator,
+    icon: FlaskConical,
     description: "SUSY QM analysis"
   },
   {
@@ -37,6 +37,24 @@ const sections = [
     title: "Results Verification",
     icon: CheckCircle,
     description: "Validation metrics"
+  },
+  {
+    id: "visualization",
+    title: "Interactive Visualization",
+    icon: Eye,
+    description: "Zero detection plots"
+  },
+  {
+    id: "workbench",
+    title: "Mathematical Workbench",
+    icon: Function,
+    description: "Interactive calculations"
+  },
+  {
+    id: "about",
+    title: "User Guide & Help",
+    icon: Info,
+    description: "Documentation & resources"
   }
 ];
 

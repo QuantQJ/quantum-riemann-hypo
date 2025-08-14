@@ -6,6 +6,9 @@ import { TheorySection } from "@/components/TheorySection";
 import { ParametersSection } from "@/components/ParametersSection";
 import { SusySection } from "@/components/SusySection";
 import { VerificationSection } from "@/components/VerificationSection";
+import { ZeroVisualization } from "@/components/ZeroVisualization";
+import { MathematicalWorkbench } from "@/components/MathematicalWorkbench";
+import { AboutSection } from "@/components/AboutSection";
 import { Toaster } from "@/components/ui/sonner";
 
 function App() {
@@ -21,6 +24,12 @@ function App() {
         return <SusySection />;
       case "verification":
         return <VerificationSection />;
+      case "visualization":
+        return <ZeroVisualization />;
+      case "workbench":
+        return <MathematicalWorkbench />;
+      case "about":
+        return <AboutSection />;
       default:
         return <OverviewSection />;
     }
