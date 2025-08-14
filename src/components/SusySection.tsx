@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Zap, FlaskConical, Target, TrendUp, CheckCircle, AlertTriangle } from "@phosphor-icons/react";
+import { Lightning, FlaskConical, Target, TrendUp, CheckCircle, AlertTriangle } from "@phosphor-icons/react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
 import { MathJax, MathJaxContext } from '@/components/MathJax';
 import { useState, useEffect } from 'react';
@@ -100,7 +100,7 @@ export function SusySection() {
       return {
         status: 'Unbroken SUSY',
         color: 'bg-blue-500',
-        icon: <Zap size={16} />,
+        icon: <Lightning size={16} />,
         description: 'Witten Index Δ ≈ 0: SUSY preserved'
       };
     } else {
@@ -138,7 +138,7 @@ export function SusySection() {
               Mirroring
             </TabsTrigger>
             <TabsTrigger value="witten" className="flex items-center gap-1">
-              <Zap size={14} />
+              <Lightning size={14} />
               Witten Index
             </TabsTrigger>
           </TabsList>
@@ -449,7 +449,7 @@ export function SusySection() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Zap size={20} />
+                  <Lightning size={20} />
                   Witten Index Calculation
                 </CardTitle>
               </CardHeader>
@@ -555,7 +555,7 @@ export function SusySection() {
                 </div>
 
                 <Alert>
-                  <Zap className="h-4 w-4" />
+                  <Lightning className="h-4 w-4" />
                   <AlertDescription>
                     <strong>Topological Protection:</strong> The near-zero Witten index (Δ ≈ 0) suggests 
                     topological protection of the zeta zero spectrum against perturbations, providing a 
