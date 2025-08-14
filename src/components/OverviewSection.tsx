@@ -363,7 +363,7 @@ export function OverviewSection({ onSectionChange }: OverviewSectionProps = {}) 
               </div>
             </Button>
             <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('parameters')}>
-              <TrendingUp className="mr-2" size={16} />
+              <TrendUp className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">Parameters</div>
                 <div className="text-xs text-muted-foreground">Contraction bounds</div>

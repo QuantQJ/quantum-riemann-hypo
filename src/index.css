@@ -212,7 +212,7 @@ button, .button {
 @media (max-width: 1024px) {
   .content-container {
     padding: 1.5rem;
-    margin-top: 5rem; /* Further increased separation */
+    margin-top: 8rem; /* Even more separation on mobile */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -223,19 +223,19 @@ button, .button {
   .navigation-container {
     position: relative;
     max-height: none;
-    margin-bottom: 5rem; /* Further increased clear separation */
+    margin-bottom: 8rem; /* Much larger separation buffer */
     overflow: visible;
     width: 100%;
     max-width: 100%;
     z-index: 10; /* Higher z-index for navigation */
     background: var(--background);
-    padding-bottom: 2rem; /* Add padding to create buffer */
+    padding-bottom: 4rem; /* Larger padding buffer */
   }
   
   /* Ensure navigation doesn't overlap content on small screens */
   .content-column {
-    margin-top: 5rem; /* Further increased clear separation from navigation */
-    padding-top: 2rem;
+    margin-top: 8rem; /* Much larger separation from navigation */
+    padding-top: 4rem;
     min-height: calc(100vh - 300px);
     clear: both; /* Ensure content clears any floated navigation */
     position: relative;
@@ -243,11 +243,25 @@ button, .button {
   }
   
   .main-grid {
-    gap: 6rem; /* Even more gap on mobile for complete separation */
+    gap: 8rem; /* Maximum gap on mobile for complete separation */
     display: flex;
     flex-direction: column;
   }
   
+  /* Add a visual separator between navigation and content */
+  .navigation-container::after {
+    content: '';
+    position: absolute;
+    bottom: -2rem;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      oklch(0.88 0.01 240) 50%, 
+      transparent 100%);
+  }
+}
   /* Add a visual separator between navigation and content */
   .navigation-container::after {
     content: '';
@@ -281,7 +295,7 @@ button, .button {
     overflow-y: auto;
     max-width: 320px;
     /* Clear separation from content */
-    margin-right: 4rem; /* Further increased margin */
+    margin-right: 6rem; /* Maximum margin for complete separation */
     z-index: 10; /* Higher z-index for navigation */
     background: var(--background);
   }
@@ -289,7 +303,7 @@ button, .button {
   /* Prevent content from wrapping under navigation */
   .content-column {
     margin-left: 0;
-    padding-left: 4rem; /* Further increased padding for separation */
+    padding-left: 6rem; /* Maximum padding for separation */
     overflow-x: hidden;
     width: 100%;
     min-width: 0;
@@ -299,7 +313,7 @@ button, .button {
   
   .main-grid {
     grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
-    gap: 6rem; /* Even more gap to prevent any overlap */
+    gap: 8rem; /* Maximum gap to prevent any overlap */
     align-items: start;
     overflow: hidden;
   }
@@ -368,7 +382,7 @@ button, .button {
 @media (min-width: 1024px) {
   .main-grid {
     grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
-    gap: 6rem; /* Even more gap to prevent any overlap */
+    gap: 8rem; /* Maximum gap to prevent any overlap */
     align-items: start;
     overflow: hidden;
   }
@@ -494,17 +508,17 @@ button, .button {
 @media (max-width: 768px) {
   .content-container {
     padding: 1rem;
-    margin-top: 8rem; /* Even larger margin for very small screens */
+    margin-top: 12rem; /* Maximum margin for very small screens */
   }
   
   .navigation-container {
-    margin-bottom: 8rem; /* Larger separation on small screens */
-    padding-bottom: 3rem;
+    margin-bottom: 12rem; /* Maximum separation on small screens */
+    padding-bottom: 6rem;
   }
   
   .section-transition {
-    margin-top: 3rem;
-    padding: 3rem 0;
+    margin-top: 6rem;
+    padding: 6rem 0;
   }
   
   /* Responsive mathematical content for small screens */
