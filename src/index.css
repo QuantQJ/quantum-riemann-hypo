@@ -212,8 +212,7 @@ button, .button {
 @media (max-width: 1024px) {
   .content-container {
     padding: 0;
-    margin-top: 0; /* Remove top margin since we'll use explicit spacing */
-    /* Ensure separation from navigation on mobile */
+    margin-top: 2rem; /* Add clear separation */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -222,8 +221,7 @@ button, .button {
   .navigation-container {
     position: relative;
     max-height: none;
-    margin-bottom: 3rem; /* Increased separation */
-    /* Ensure the navigation is fully contained */
+    margin-bottom: 2rem; /* Clear separation */
     overflow: visible;
     width: 100%;
     max-width: 100%;
@@ -231,23 +229,21 @@ button, .button {
   
   /* Ensure navigation doesn't overlap content on small screens */
   .content-column {
-    margin-top: 0;
-    padding-top: 1.5rem; /* Increased padding to create more space */
-    /* Ensure content doesn't get cut off */
-    min-height: calc(100vh - 250px); /* Increased to account for larger navigation height */
+    margin-top: 2rem; /* Clear separation from navigation */
+    padding-top: 0;
+    min-height: calc(100vh - 200px);
   }
   
   .main-grid {
-    gap: 2rem; /* Increased gap on mobile */
+    gap: 3rem; /* Increased gap on mobile for better separation */
   }
 }
 
 /* Fix spacing for larger screens to prevent overlap */
 @media (min-width: 1024px) {
   .content-container {
-    padding: 0; /* Remove padding to rely on grid gap */
+    padding: 1rem; /* Add some padding for better spacing */
     margin: 0;
-    /* Ensure content is properly separated from navigation */
     min-height: 100vh;
   }
   
@@ -257,19 +253,18 @@ button, .button {
     top: 2rem;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
-    max-width: 320px; /* Fixed max width */
-    /* Ensure navigation doesn't interfere with content */
-    z-index: 10;
+    max-width: 320px;
+    /* Clear separation from content */
+    margin-right: 2rem;
   }
   
   /* Prevent content from wrapping under navigation */
   .content-column {
-    margin-left: 0; /* Let grid handle spacing */
-    padding-left: 0;
-    /* Ensure content stays in its column */
+    margin-left: 0;
+    padding-left: 2rem; /* Add padding for separation */
     overflow-x: hidden;
     width: 100%;
-    min-width: 0; /* Allow content to shrink */
+    min-width: 0;
   }
 }
 
@@ -330,9 +325,8 @@ button, .button {
 @media (min-width: 1024px) {
   .main-grid {
     grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
-    gap: 3rem; /* Increased gap to prevent overlap */
+    gap: 4rem; /* Increased gap to prevent overlap */
     align-items: start;
-    /* Ensure proper layout containment */
     overflow: hidden;
   }
 }
