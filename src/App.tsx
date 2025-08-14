@@ -29,8 +29,8 @@ function App() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1">
+        <div className="main-grid">
+          <div className="navigation-column">
             <div className="navigation-container">
               <Navigation 
                 activeSection={activeSection} 
@@ -38,7 +38,7 @@ function App() {
               />
             </div>
           </div>
-          <div className="lg:col-span-3">
+          <div className="content-column">
             <div className="content-container">
               <div className="section-transition">
                 {renderSection()}
