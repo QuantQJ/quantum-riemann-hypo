@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { CheckCircle, AlertTriangle, Calculator } from '@phosphor-icons/react';
-import { MathJax, MathJaxContext } from '@/components/MathJax';
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, 
+import { MathJax, MathJaxContext } from '@/com
 interface ConvergenceData {
-  iteration: number;
   theoreticalBound: number;
-  actualError: number;
 }
 
 interface RigorousConstants {
