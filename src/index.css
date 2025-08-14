@@ -59,7 +59,7 @@ button, .button {
 }
 
 :root {
-  /* Quantum-inspired color scheme */
+  /* Quantum-inspired color scheme with improved backgrounds */
   --background: oklch(0.98 0.01 240);
   --foreground: oklch(0.15 0.05 240);
   --card: oklch(1 0 0);
@@ -84,6 +84,12 @@ button, .button {
   /* Scientific purple for theoretical sections */
   --scientific-purple: oklch(0.3 0.15 290);
   --scientific-purple-foreground: oklch(1 0 0);
+  
+  /* Enhanced quantum gradient variables */
+  --quantum-gradient-1: oklch(0.98 0.01 240);
+  --quantum-gradient-2: oklch(0.96 0.02 260);
+  --quantum-gradient-3: oklch(0.98 0.01 280);
+  --quantum-gradient-4: oklch(0.95 0.03 300);
 }
 
 @theme {
@@ -362,13 +368,77 @@ button, .button {
   z-index: 1;
 }
 
-/* Quantum-inspired gradient backgrounds for special cards */
+/* Enhanced quantum gradient backgrounds for special cards */
 .quantum-gradient {
   background: linear-gradient(135deg, 
-    oklch(0.98 0.01 240) 0%,
-    oklch(0.96 0.02 260) 50%,
-    oklch(0.98 0.01 280) 100%
+    var(--quantum-gradient-1) 0%,
+    var(--quantum-gradient-2) 25%,
+    var(--quantum-gradient-3) 75%,
+    var(--quantum-gradient-4) 100%
   );
+  border: 1px solid oklch(0.9 0.02 260 / 0.3);
+  box-shadow: 0 4px 20px oklch(0.25 0.15 260 / 0.05);
+}
+
+.quantum-gradient-alt {
+  background: linear-gradient(45deg, 
+    oklch(0.98 0.01 240) 0%,
+    oklch(0.97 0.02 250) 20%,
+    oklch(0.96 0.03 270) 40%,
+    oklch(0.97 0.02 290) 60%,
+    oklch(0.98 0.01 310) 80%,
+    oklch(0.98 0.01 240) 100%
+  );
+  border: 1px solid oklch(0.88 0.02 260 / 0.4);
+}
+
+.research-gradient {
+  background: linear-gradient(120deg, 
+    oklch(0.98 0.01 240) 0%,
+    oklch(0.96 0.03 260) 30%,
+    oklch(0.95 0.04 280) 60%,
+    oklch(0.97 0.02 300) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.research-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    oklch(0.25 0.15 260 / 0.02) 25%,
+    transparent 50%,
+    oklch(0.65 0.25 35 / 0.03) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: subtle-shift 20s ease-in-out infinite;
+}
+
+@keyframes subtle-shift {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    opacity: 0.3;
+    transform: translateX(10px) translateY(-5px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(-5px) translateY(10px);
+  }
+  75% {
+    opacity: 0.4;
+    transform: translateX(-10px) translateY(-5px);
+  }
 }
 
 /* Parameter control enhancements */

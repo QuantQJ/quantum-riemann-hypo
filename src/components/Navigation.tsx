@@ -1,4 +1,4 @@
-import { ChevronRight, Calculator, BarChart, CheckCircle, BookOpen, Eye, Function, FlaskConical, Info, Share } from "@phosphor-icons/react";
+import { ChevronRight, Calculator, BarChart, CheckCircle, BookOpen, Eye, Function, FlaskConical, Info, Share, FileText } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -49,6 +49,12 @@ const sections = [
     title: "Mathematical Workbench",
     icon: Function,
     description: "Interactive calculations"
+  },
+  {
+    id: "references",
+    title: "References & Bibliography",
+    icon: FileText,
+    description: "Citations & acknowledgments"
   },
   {
     id: "share",

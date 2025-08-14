@@ -8,6 +8,7 @@ import { SusySection } from "@/components/SusySection";
 import { VerificationSection } from "@/components/VerificationSection";
 import { ZeroVisualization } from "@/components/ZeroVisualization";
 import { MathematicalWorkbench } from "@/components/MathematicalWorkbench";
+import { ReferencesSection } from "@/components/ReferencesSection";
 import { AboutSection } from "@/components/AboutSection";
 import { ShareSection } from "@/components/ShareSection";
 import { Toaster } from "@/components/ui/sonner";
@@ -33,6 +34,8 @@ function App() {
         return <ZeroVisualization key="visualization" />;
       case "workbench":
         return <MathematicalWorkbench key="workbench" />;
+      case "references":
+        return <ReferencesSection key="references" />;
       case "share":
         return <ShareSection key="share" />;
       case "about":
@@ -43,7 +46,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen research-gradient">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="main-grid">
           <div className="navigation-column">
