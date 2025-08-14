@@ -320,7 +320,7 @@ export function OverviewSection() {
                 <li className="flex items-start gap-3">
                   <Target size={16} className="text-blue-600 mt-0.5" />
                   <div className="text-sm">
-                    <strong>Convergence Quality Metrics:</strong> Mean error < 0.01% for first 100 zeros 
+                    <strong>Convergence Quality Metrics:</strong> Mean error &lt; 0.01% for first 100 zeros 
                     with robust statistical validation
                   </div>
                 </li>
