@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import { MathJax, MathJaxContext } from '@/components/MathJax';
 import { BookOpen, Target, Zap, CheckCircle } from "@phosphor-icons/react";
 
 const mathJaxConfig = {

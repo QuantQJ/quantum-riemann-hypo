@@ -157,3 +157,39 @@
   );
   border: 1px solid oklch(0.65 0.25 35 / 0.3);
 }
+
+/* Mathematical display styling */
+.math-display {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.math-inline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05em;
+}
+
+.mathjax-context {
+  line-height: 1.6;
+}
+
+.frac {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.frac .num {
+  display: block;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1em;
+}
+
+.frac .den {
+  display: block;
+  padding-top: 0.1em;
+}

@@ -3,8 +3,10 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Activity, TrendingUp, Zap, AlertTriangle } from '@phosphor-icons/react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Activity, TrendingUp, Zap, AlertTriangle, Calculator } from '@phosphor-icons/react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { ConvergenceAnalysis } from '@/components/ConvergenceAnalysis';
 
 interface ParameterData {
   beta: number;
@@ -179,6 +181,14 @@ export function ParametersSection() {
           Interactive validation of rigorous contraction bounds from Theorem 3
         </p>
       </div>
+
+      <Tabs defaultValue="interactive" className="w-full">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="interactive">Interactive Explorer</TabsTrigger>
+          <TabsTrigger value="rigorous">Rigorous Analysis</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="interactive" className="space-y-6">
 
       {/* Parameter Controls */}
       <Card className="hover-lift">
@@ -484,7 +494,12 @@ export function ParametersSection() {
             </div>
           </div>
         </CardContent>
-      </Card>
+        </TabsContent>
+
+        <TabsContent value="rigorous">
+          <ConvergenceAnalysis />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
