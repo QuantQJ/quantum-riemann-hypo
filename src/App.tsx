@@ -31,7 +31,7 @@ function App() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
-            <div className="sticky top-8">
+            <div className="navigation-container">
               <Navigation 
                 activeSection={activeSection} 
                 onSectionChange={setActiveSection} 
@@ -39,8 +39,10 @@ function App() {
             </div>
           </div>
           <div className="lg:col-span-3">
-            <div className="section-transition">
-              {renderSection()}
+            <div className="content-container">
+              <div className="section-transition">
+                {renderSection()}
+              </div>
             </div>
           </div>
         </div>

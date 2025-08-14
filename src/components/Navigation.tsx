@@ -12,39 +12,39 @@ const sections = [
     id: "overview",
     title: "Research Overview",
     icon: BookOpen,
-    description: "Abstract and theoretical framework"
+    description: "Abstract & framework"
   },
   {
     id: "theory",
     title: "Theoretical Framework", 
     icon: Calculator,
-    description: "Mathematical foundations and equations"
+    description: "Math foundations"
   },
   {
     id: "parameters",
     title: "Parameter Analysis",
     icon: BarChart, 
-    description: "Beta sweep and optimization results"
+    description: "Optimization results"
   },
   {
     id: "susy",
     title: "SUSY Integration",
     icon: Calculator,
-    description: "Supersymmetric quantum mechanics analysis"
+    description: "SUSY QM analysis"
   },
   {
     id: "verification",
     title: "Results Verification",
     icon: CheckCircle,
-    description: "Comprehensive validation metrics"
+    description: "Validation metrics"
   }
 ];
 
 export function Navigation({ activeSection, onSectionChange }: NavigationProps) {
   return (
-    <Card className="p-6">
-      <h2 className="text-xl font-semibold mb-4 text-primary">Navigation</h2>
-      <nav className="space-y-2">
+    <Card className="p-4 w-full">
+      <h2 className="text-lg font-semibold mb-3 text-primary">Navigation</h2>
+      <nav className="space-y-1.5">
         {sections.map((section) => {
           const Icon = section.icon;
           const isActive = activeSection === section.id;
@@ -53,22 +53,22 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             <Button
               key={section.id}
               variant={isActive ? "default" : "ghost"}
-              className={`w-full justify-start text-left h-auto p-3 hover-lift ${
-                isActive ? "bg-primary text-primary-foreground" : ""
+              className={`w-full justify-start text-left h-auto p-2.5 hover-lift transition-all duration-200 navigation-button ${
+                isActive ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-secondary/50"
               }`}
               onClick={() => onSectionChange(section.id)}
             >
-              <div className="flex items-center gap-3 w-full">
-                <Icon size={20} />
-                <div className="flex-1">
-                  <div className="font-medium">{section.title}</div>
-                  <div className={`text-sm ${
+              <div className="flex items-start gap-2.5 w-full">
+                <Icon size={18} className="flex-shrink-0 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-sm leading-tight">{section.title}</div>
+                  <div className={`text-xs leading-tight mt-0.5 description ${
                     isActive ? "text-primary-foreground/80" : "text-muted-foreground"
                   }`}>
                     {section.description}
                   </div>
                 </div>
-                {isActive && <ChevronRight size={16} />}
+                {isActive && <ChevronRight size={14} className="flex-shrink-0 mt-1" />}
               </div>
             </Button>
           );

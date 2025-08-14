@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calculator, CheckCircle, AlertTriangle, TrendingDown } from '@phosphor-icons/react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { MathJax, MathJaxContext } from 'better-react-mathjax';
+import { MathJax, MathJaxContext } from '@/components/MathJax';
 
 interface ConvergenceData {
   iteration: number;

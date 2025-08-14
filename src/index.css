@@ -65,15 +65,10 @@
   --radius-lg: calc(var(--radius) * 1.5);
   --radius-xl: calc(var(--radius) * 2);
   --radius-2xl: calc(var(--radius) * 3);
+  --radius-full: 9999px;
+  
   --color-scientific-purple: var(--scientific-purple);
   --color-scientific-purple-foreground: var(--scientific-purple-foreground);
-
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) * 1.5);
-  --radius-xl: calc(var(--radius) * 2);
-  --radius-2xl: calc(var(--radius) * 3);
-  --radius-full: 9999px;
 }
 
 /* Mathematical typography enhancements */
@@ -129,8 +124,62 @@
   padding: 1rem;
 }
 
+/* Enhanced navigation and layout */
+.navigation-container {
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.88 0.01 240) transparent;
+}
+
+.navigation-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.navigation-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.navigation-container::-webkit-scrollbar-thumb {
+  background-color: oklch(0.88 0.01 240);
+  border-radius: 3px;
+}
+
+.content-container {
+  min-height: 100vh;
+  padding-left: 0.5rem; /* Add some left padding to prevent overlap */
+}
+
+@media (max-width: 1024px) {
+  .content-container {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+  
+  .navigation-container {
+    position: relative;
+    max-height: none;
+    margin-bottom: 1rem;
+  }
+}
+
 .section-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure navigation buttons don't wrap text awkwardly */
+.navigation-button {
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.navigation-button .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .hover-lift:hover {
