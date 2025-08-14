@@ -1,6 +1,6 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import { ErrorBoundary } from 'react-error-boundary'
+import { createRoot } from 'react-dom/client';
+import { ErrorBoundary } from 'react-error-boundary';
+import App from './App.tsx';
 
 // Error Fallback Component
 function ErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {

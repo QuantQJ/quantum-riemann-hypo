@@ -22,4 +22,20 @@ export default defineConfig({
       '@': resolve(projectRoot, 'src')
     }
   },
+  base: process.env.NODE_ENV === 'production' ? '/spark-template/' : '/',
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-tabs', '@radix-ui/react-slider'],
+        }
+      }
+    }
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@phosphor-icons/react']
+  }
 });
