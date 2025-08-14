@@ -23,21 +23,21 @@ const keyFindings = [
   },
   {
     title: "SUSY Preservation",
-    value: "Δ ≈ 0",
+    value: "&Delta; &asymp; 0",
     description: "Witten index confirms unbroken supersymmetry",
     icon: <Zap size={20} />,
     color: "text-blue-600"
   },
   {
     title: "Contraction Bound",
-    value: "Λ(α,β) < 1",
+    value: "&Lambda;(&alpha;,&beta;) < 1",
     description: "Rigorous linear convergence with explicit rates",
     icon: <Target size={20} />,
     color: "text-green-600"
   },
   {
     title: "Mode Overlap",
-    value: "η₀ > 0",
+    value: "&eta;<sub>0</sub> > 0",
     description: "Non-vanishing overlap ensures basin attraction",
     icon: <CheckCircle size={20} />,
     color: "text-orange-600"
@@ -56,7 +56,7 @@ export function OverviewSection() {
           </blockquote>
           <div className="mathematical-content text-center py-4 spectral-emphasis">
             <div className="text-xl font-mono font-semibold text-primary">
-              E<sub>k</sub> = (ℏ²/2m) ‖(1/2, γ<sub>k</sub>)‖²
+              E<sub>k</sub> = (&hbar;&sup2;/2m) &lVert;(1/2, &gamma;<sub>k</sub>)&rVert;&sup2;
             </div>
             <div className="text-sm text-muted-foreground mt-2">
               The spectral tautology: eigenvalues encoded by zero coordinates
@@ -75,19 +75,19 @@ export function OverviewSection() {
           </p>
           <div className="mathematical-content my-4">
             <div className="text-center">
-              E<sub>k</sub> = (ℏ²/2m)(1/4 + γ<sub>k</sub>²)
+              E<sub>k</sub> = (&hbar;&sup2;/2m)(1/4 + &gamma;<sub>k</sub>&sup2;)
             </div>
-            <p className="text-sm text-muted-foreground mt-2">where γ<sub>k</sub> are the zeros' imaginary parts</p>
+            <p className="text-sm text-muted-foreground mt-2">where &gamma;<sub>k</sub> are the zeros' imaginary parts</p>
           </div>
           <p className="text-muted-foreground leading-relaxed">
-            This is a <strong className="text-scientific-purple">Gödelian loop</strong>: the zeros define <em>H</em>'s spectrum, while <em>H</em>'s spectral projectors reconstruct their locations—binding analytic number theory to spectral geometry via the norm ‖(1/2, γ<sub>k</sub>)‖. <strong>Proving the Riemann Hypothesis reduces to showing that <em>H</em>'s spectrum encodes only these critical-line zeros</strong>—a self-validating cycle where spectral existence implies truth.
+            This is a <strong className="text-scientific-purple">Gödelian loop</strong>: the zeros define <em>H</em>'s spectrum, while <em>H</em>'s spectral projectors reconstruct their locations—binding analytic number theory to spectral geometry via the norm &lVert;(1/2, &gamma;<sub>k</sub>)&rVert;. <strong>Proving the Riemann Hypothesis reduces to showing that <em>H</em>'s spectrum encodes only these critical-line zeros</strong>—a self-validating cycle where spectral existence implies truth.
           </p>
         </div>
 
         {/* Mechanism Paragraph */}
         <div className="text-left max-w-5xl mx-auto mb-8">
           <p className="text-muted-foreground leading-relaxed">
-            To realize this loop, we construct <em>H</em> from the prime-counting function π(<em>x</em>) and its logarithmic integral Li(<em>x</em>). The resulting <strong className="text-accent">prime-driven quantum feedback potential</strong> generates a spectral operator whose eigenvalues are <em>exactly</em> the squares 1/4 + γ<sub>k</sub>²—<strong>transforming the hunt for zeros into a convergence problem for its spectral flow</strong>.
+            To realize this loop, we construct <em>H</em> from the prime-counting function π(<em>x</em>) and its logarithmic integral Li(<em>x</em>). The resulting <strong className="text-accent">prime-driven quantum feedback potential</strong> generates a spectral operator whose eigenvalues are <em>exactly</em> the squares 1/4 + &gamma;<sub>k</sub>&sup2;—<strong>transforming the hunt for zeros into a convergence problem for its spectral flow</strong>.
           </p>
         </div>
 
@@ -148,15 +148,15 @@ export function OverviewSection() {
               <div>
                 <h4 className="font-semibold mb-2 text-scientific-purple">Gödelian Architecture</h4>
                 <p className="text-sm text-muted-foreground">
-                  The quantum feedback potential encodes prime structure through Δ(x) = π(x) - Li(x), 
-                  creating spectral resonances at exactly the critical-line coordinates ‖(1/2, γₖ)‖².
+                  The quantum feedback potential encodes prime structure through &Delta;(x) = &pi;(x) - Li(x), 
+                  creating spectral resonances at exactly the critical-line coordinates &lVert;(1/2, &gamma;<sub>k</sub>)&rVert;&sup2;.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold mb-2 text-accent">Contraction Dynamics</h4>
                 <p className="text-sm text-muted-foreground">
-                  Rigorous Λ(α,β) &lt; 1 bounds ensure linear convergence from any prime-structured 
-                  initial state, with mode overlap η₀ > 0 preventing spectral degeneracy.
+                  Rigorous &Lambda;(&alpha;,&beta;) &lt; 1 bounds ensure linear convergence from any prime-structured 
+                  initial state, with mode overlap &eta;<sub>0</sub> > 0 preventing spectral degeneracy.
                 </p>
               </div>
             </div>
@@ -164,10 +164,10 @@ export function OverviewSection() {
             <div className="mathematical-content">
               <h4 className="font-medium mb-2">The Spectral Tautology</h4>
               <div className="space-y-1 text-sm font-mono">
-                <p>1. Zeros {(1/2, γₖ)} → Eigenvalues {ℏ²/2m(1/4 + γₖ²)}</p>
-                <p>2. Spectral evolution ψₙ = e^(-iHₙt/ℏ)ψ₀</p>
-                <p>3. Node extraction γₖ^(n) from spectral projectors</p>
-                <p>4. Convergence γₖ^(n) → γₖ closes the loop</p>
+                <p>1. Zeros: (1/2, &gamma;<sub>k</sub>) &rarr; Eigenvalues: &hbar;&sup2;/2m(1/4 + &gamma;<sub>k</sub>&sup2;)</p>
+                <p>2. Spectral evolution &psi;<sub>n</sub> = e<sup>(-iH<sub>n</sub>t/&hbar;)</sup>&psi;<sub>0</sub></p>
+                <p>3. Node extraction &gamma;<sub>k</sub><sup>(n)</sup> from spectral projectors</p>
+                <p>4. Convergence &gamma;<sub>k</sub><sup>(n)</sup> &rarr; &gamma;<sub>k</sub> closes the loop</p>
               </div>
             </div>
           </div>
@@ -183,32 +183,32 @@ export function OverviewSection() {
           <div className="mathematical-content">
             <h4 className="font-medium mb-3">Effective Hamiltonian: From Primes to Spectrum</h4>
             <div className="space-y-1 text-sm">
-              <p>H<sub>eff</sub> = -ℏ²/(2m)∇² + V<sub>quantum</sub>(Δ) + V<sub>feedback</sub>(γₖ^(n-1))</p>
-              <p>V<sub>quantum</sub> = -2(d²/dx²)|Δ(x)|/|Δ(x)| — prime structure encoding</p>
-              <p>V<sub>feedback</sub> = α(t) Σₖ exp(-β(x-γₖ^(n-1))²) — convergence forcing</p>
-              <p>Δ(x) = π(x) - Li(x) ≈ -Σ<sub>γ</sub> sin(γ log x)/γ — explicit formula</p>
+              <p>H<sub>eff</sub> = -&hbar;&sup2;/(2m)&nabla;&sup2; + V<sub>quantum</sub>(&Delta;) + V<sub>feedback</sub>(&gamma;<sub>k</sub><sup>(n-1)</sup>)</p>
+              <p>V<sub>quantum</sub> = -2(d&sup2;/dx&sup2;)|&Delta;(x)|/|&Delta;(x)| — prime structure encoding</p>
+              <p>V<sub>feedback</sub> = &alpha;(t) &Sigma;<sub>k</sub> exp(-&beta;(x-&gamma;<sub>k</sub><sup>(n-1)</sup>)&sup2;) — convergence forcing</p>
+              <p>&Delta;(x) = &pi;(x) - Li(x) &asymp; -&Sigma;<sub>&gamma;</sub> sin(&gamma; log x)/&gamma; — explicit formula</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="p-4 bg-primary/5">
               <h4 className="font-medium text-primary mb-2">Theorem 2: Spectral Reduction</h4>
-              <p className="text-sm">Establishes tautological eigenvalue structure: E<sub>k</sub> = ℏ²/2m(1/4 + γₖ²) from prime oscillations</p>
+              <p className="text-sm">Establishes tautological eigenvalue structure: E<sub>k</sub> = &hbar;&sup2;/2m(1/4 + &gamma;<sub>k</sub>&sup2;) from prime oscillations</p>
             </Card>
             <Card className="p-4 bg-green-500/5">
               <h4 className="font-medium text-green-600 mb-2">Theorem 3: Contraction Mapping</h4>
-              <p className="text-sm">Rigorous bounds Λ(α,β) < 1 ensure linear convergence with explicit parameter windows</p>
+              <p className="text-sm">Rigorous bounds &Lambda;(&alpha;,&beta;) < 1 ensure linear convergence with explicit parameter windows</p>
             </Card>
             <Card className="p-4 bg-blue-500/5">
               <h4 className="font-medium text-blue-600 mb-2">Theorem 4: Mode Overlap Convergence</h4>
-              <p className="text-sm">Polyak-Łojasiewicz conditions from η₀ > 0 guarantee convergence basin entry</p>
+              <p className="text-sm">Polyak-&Lstrok;ojasiewicz conditions from &eta;<sub>0</sub> > 0 guarantee convergence basin entry</p>
             </Card>
           </div>
 
           <div className="bg-muted/30 p-4 rounded-lg">
             <h4 className="font-medium mb-2 text-scientific-purple">The Loop Closure</h4>
             <p className="text-sm text-muted-foreground">
-              Each iteration γₖ^(n-1) → γₖ^(n) moves closer to the critical line. The spectral 
+              Each iteration &gamma;<sub>k</sub><sup>(n-1)</sup> &rarr; &gamma;<sub>k</sub><sup>(n)</sup> moves closer to the critical line. The spectral 
               projector P<sub>k</sub>(H<sub>n</sub>) extracts node positions from wavefunctions whose 
               evolution was determined by those very positions—completing the Gödelian cycle where 
               <strong>the theorem proves itself through its own verification mechanism</strong>.

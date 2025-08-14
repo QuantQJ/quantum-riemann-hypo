@@ -159,14 +159,14 @@ export function ParametersSection() {
         status: 'Unbroken SUSY', 
         color: 'bg-blue-500', 
         icon: <Zap size={16} />,
-        description: 'Witten Index Δ ≈ 0: SUSY preserved'
+        description: 'Witten Index &Delta; &asymp; 0: SUSY preserved'
       };
     } else {
       return { 
         status: 'Broken SUSY', 
         color: 'bg-orange-500', 
         icon: <AlertTriangle size={16} />,
-        description: 'Witten Index |Δ| > 0.005: SUSY broken'
+        description: 'Witten Index |&Delta;| > 0.005: SUSY broken'
       };
     }
   };
@@ -195,7 +195,7 @@ export function ParametersSection() {
               {/* Alpha Parameter */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="font-medium">Gaussian Amplitude (α)</label>
+                  <label className="font-medium">Gaussian Amplitude (&alpha;)</label>
                   <Badge variant={alpha[0] <= 0.15 ? "default" : "secondary"}>
                     {alpha[0].toFixed(3)}
                   </Badge>
@@ -218,7 +218,7 @@ export function ParametersSection() {
               {/* Beta Parameter */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="font-medium">Gaussian Width (β)</label>
+                  <label className="font-medium">Gaussian Width (&beta;)</label>
                   <Badge variant={beta[0] >= 4.0 ? "default" : "secondary"}>
                     {beta[0].toFixed(1)}
                   </Badge>
@@ -268,7 +268,7 @@ export function ParametersSection() {
             disabled={isSimulating}
             className="w-full"
           >
-            {isSimulating ? 'Computing Λ(α,β)...' : 'Recompute Contraction Factor'}
+            {isSimulating ? 'Computing &Lambda;(&alpha;,&beta;)...' : 'Recompute Contraction Factor'}
           </Button>
         </CardContent>
       </Card>
@@ -293,7 +293,7 @@ export function ParametersSection() {
                 {currentData.contractionFactor.toFixed(3)}
               </div>
               <p className="text-xs text-muted-foreground text-center">
-                Contraction Factor Λ(α,β)
+                Contraction Factor &Lambda;(&alpha;,&beta;)
               </p>
             </CardContent>
           </Card>
@@ -315,7 +315,7 @@ export function ParametersSection() {
                 {currentData.avgError.toFixed(4)}
               </div>
               <p className="text-xs text-muted-foreground text-center">
-                RMS Error (γ units)
+                RMS Error (&gamma; units)
               </p>
             </CardContent>
           </Card>
@@ -340,8 +340,8 @@ export function ParametersSection() {
                 })()}
               </div>
               <p className="text-sm text-muted-foreground">
-                Λ(α,β) = {currentData.contractionFactor.toFixed(3)} 
-                {currentData.contractionFactor < 1 ? ' < 1 ✓' : ' ≥ 1 ✗'}
+                &Lambda;(&alpha;,&beta;) = {currentData.contractionFactor.toFixed(3)} 
+                {currentData.contractionFactor < 1 ? ' < 1 ✓' : ' &ge; 1 ✗'}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
                 {getContractivityStatus(currentData.contractionFactor).description}
@@ -364,7 +364,7 @@ export function ParametersSection() {
                 })()}
               </div>
               <p className="text-sm text-muted-foreground">
-                Witten Index Δ = {currentData.susyIndex.toFixed(4)}
+                Witten Index &Delta; = {currentData.susyIndex.toFixed(4)}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
                 {getSUSYStatus(currentData.susyIndex).description}
@@ -386,7 +386,7 @@ export function ParametersSection() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis 
                   dataKey="alpha" 
-                  tickFormatter={(value) => `α=${Number(value).toFixed(2)}`} 
+                  tickFormatter={(value) => `&alpha;=${Number(value).toFixed(2)}`} 
                 />
                 <YAxis domain={[0, 2]} />
                 <Tooltip
@@ -402,7 +402,7 @@ export function ParametersSection() {
                   stroke="#dc2626"
                   strokeWidth={2}
                   dot={{ r: 4 }}
-                  name="Λ(α,β)"
+                  name="&Lambda;(&alpha;,&beta;)"
                 />
                 <Line
                   type="monotone"
@@ -410,7 +410,7 @@ export function ParametersSection() {
                   stroke="#22c55e"
                   strokeWidth={1}
                   strokeDasharray="5 5"
-                  name="Critical Value (Λ=1)"
+                  name="Critical Value (&Lambda;=1)"
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -428,21 +428,21 @@ export function ParametersSection() {
             <div className="mathematical-content">
               <h4 className="font-semibold mb-3">Theorem 3: Contraction Factor</h4>
               <div className="space-y-2 text-sm">
-                <p><strong>Λ(α,β) = max_k(αC₁C_{'{'}node,k{'}'}/Δ_k√β) + C_{'{'}leak{'}'}exp(-βδ²_{'{'}min{'}'}/4)</strong></p>
+                <p><strong>&Lambda;(&alpha;,&beta;) = max_k(&alpha;C<sub>1</sub>C<sub>node,k</sub>/&Delta;<sub>k</sub>&radic;&beta;) + C<sub>leak</sub>exp(-&beta;&delta;<sup>2</sup><sub>min</sub>/4)</strong></p>
                 <div className="grid grid-cols-2 gap-4 mt-3">
                   <div>
                     <p className="font-medium">Current Values:</p>
-                    <p>• α = {alpha[0].toFixed(3)}</p>
-                    <p>• β = {beta[0].toFixed(1)}</p>
-                    <p>• C₁ = {C1.toFixed(3)}</p>
-                    <p>• C_{'{'}leak{'}'} = {CLeak}</p>
+                    <p>&bull; &alpha; = {alpha[0].toFixed(3)}</p>
+                    <p>&bull; &beta; = {beta[0].toFixed(1)}</p>
+                    <p>&bull; C<sub>1</sub> = {C1.toFixed(3)}</p>
+                    <p>&bull; C<sub>leak</sub> = {CLeak}</p>
                   </div>
                   <div>
                     <p className="font-medium">Bounds:</p>
-                    <p>• δ_{'{'}min{'}'} = {bounds.deltaMin}</p>
-                    <p>• max Δ_k = {Math.max(...bounds.spectralGaps)}</p>
-                    <p>• Leakage: {(CLeak * Math.exp(-beta[0] * bounds.deltaMin * bounds.deltaMin / 4)).toFixed(6)}</p>
-                    <p>• Stiffness: {currentData ? (currentData.contractionFactor - CLeak * Math.exp(-beta[0] * bounds.deltaMin * bounds.deltaMin / 4)).toFixed(3) : 'N/A'}</p>
+                    <p>&bull; &delta;<sub>min</sub> = {bounds.deltaMin}</p>
+                    <p>&bull; max &Delta;<sub>k</sub> = {Math.max(...bounds.spectralGaps)}</p>
+                    <p>&bull; Leakage: {(CLeak * Math.exp(-beta[0] * bounds.deltaMin * bounds.deltaMin / 4)).toFixed(6)}</p>
+                    <p>&bull; Stiffness: {currentData ? (currentData.contractionFactor - CLeak * Math.exp(-beta[0] * bounds.deltaMin * bounds.deltaMin / 4)).toFixed(3) : 'N/A'}</p>
                   </div>
                 </div>
               </div>
@@ -451,8 +451,8 @@ export function ParametersSection() {
             <div className="mathematical-content">
               <h4 className="font-semibold mb-3">Parameter Selection Strategy</h4>
               <div className="text-sm space-y-2">
-                <p><strong>Step 1:</strong> Choose β ≥ (4/δ²_{'{'}min{'}'}){'{'}ln(2C_{'{'}leak{'}'}/ε){'}'} = {(4 / (bounds.deltaMin ** 2) * Math.log(2 * CLeak / 0.1)).toFixed(1)} for ε=0.1</p>
-                <p><strong>Step 2:</strong> Choose α ≤ min_k[(1-ε)Δ_k/(C₁C_{'{'}node,k{'}'}√β)]</p>
+                <p><strong>Step 1:</strong> Choose &beta; &ge; (4/&delta;<sup>2</sup><sub>min</sub>)ln(2C<sub>leak</sub>/&epsilon;) = {(4 / (bounds.deltaMin ** 2) * Math.log(2 * CLeak / 0.1)).toFixed(1)} for &epsilon;=0.1</p>
+                <p><strong>Step 2:</strong> Choose &alpha; &le; min<sub>k</sub>[(1-&epsilon;)&Delta;<sub>k</sub>/(C<sub>1</sub>C<sub>node,k</sub>&radic;&beta;)]</p>
                 <p><strong>Current Status:</strong> {currentData && currentData.contractionFactor < 1 ? '✅ Satisfies contraction condition' : '❌ Violates contraction condition'}</p>
               </div>
             </div>
@@ -460,9 +460,9 @@ export function ParametersSection() {
             <div className="border-l-4 border-blue-500/30 bg-blue-500/5 p-4 rounded-r">
               <h4 className="font-semibold mb-2">Convergence Guarantee</h4>
               <p className="text-sm">
-                When Λ(α,β) &lt; 1, Theorem 3 guarantees exponential convergence:
+                When &Lambda;(&alpha;,&beta;) &lt; 1, Theorem 3 guarantees exponential convergence:
                 <br />
-                <span className="font-mono">||e^{'{'}(n){'}'} ||_∞ ≤ λⁿ ||e^{'{'}(0){'}'} ||_∞ with λ = {currentData ? currentData.contractionFactor.toFixed(3) : 'N/A'}</span>
+                <span className="font-mono">||e<sup>(n)</sup>||<sub>&infin;</sub> &le; &lambda;<sup>n</sup> ||e<sup>(0)</sup>||<sub>&infin;</sub> with &lambda; = {currentData ? currentData.contractionFactor.toFixed(3) : 'N/A'}</span>
               </p>
             </div>
           </div>
@@ -478,7 +478,7 @@ export function ParametersSection() {
               <p className="font-medium mb-1">Mathematical Rigor</p>
               <p className="text-muted-foreground">
                 These parameter bounds come from rigorous analysis of spectral projector perturbations (Davis-Kahan), 
-                Gaussian potential separation, and Polyak-Łojasiewicz conditions. The contraction factor Λ(α,β) is 
+                Gaussian potential separation, and Polyak-&Lstrok;ojasiewicz conditions. The contraction factor &Lambda;(&alpha;,&beta;) is 
                 computed exactly from the theoretical framework, not fitted to data.
               </p>
             </div>
