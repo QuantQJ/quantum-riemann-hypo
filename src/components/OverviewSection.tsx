@@ -44,7 +44,11 @@ const keyFindings = [
   }
 ];
 
-export function OverviewSection() {
+interface OverviewSectionProps {
+  onSectionChange?: (section: string) => void;
+}
+
+export function OverviewSection({ onSectionChange }: OverviewSectionProps = {}) {
   return (
     <div className="space-y-8">
       {/* Hero Section with Refined Epigraph */}
@@ -351,28 +355,28 @@ export function OverviewSection() {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Button variant="outline" className="justify-start" size="lg">
+            <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('theory')}>
               <Calculator className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">Theory</div>
                 <div className="text-xs text-muted-foreground">Convergence proofs</div>
               </div>
             </Button>
-            <Button variant="outline" className="justify-start" size="lg">
+            <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('parameters')}>
               <TrendingUp className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">Parameters</div>
                 <div className="text-xs text-muted-foreground">Contraction bounds</div>
               </div>
             </Button>
-            <Button variant="outline" className="justify-start" size="lg">
+            <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('susy')}>
               <Zap className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">SUSY</div>
                 <div className="text-xs text-muted-foreground">Witten index</div>
               </div>
             </Button>
-            <Button variant="outline" className="justify-start" size="lg">
+            <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('verification')}>
               <CheckCircle className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">Verification</div>

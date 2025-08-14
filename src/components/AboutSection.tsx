@@ -16,7 +16,7 @@ const mathJaxConfig = {
 
 export function AboutSection() {
   return (
-    <MathJaxContext config={mathJaxConfig}>
+    <MathJaxContext>
       <div className="space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-primary mb-4">User Guide & Documentation</h1>

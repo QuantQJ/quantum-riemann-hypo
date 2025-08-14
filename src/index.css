@@ -212,21 +212,33 @@ button, .button {
 @media (max-width: 1024px) {
   .content-container {
     padding: 0;
-    margin-top: 2rem; /* Increased margin to prevent overlap */
+    margin-top: 0; /* Remove top margin since we'll use explicit spacing */
     /* Ensure separation from navigation on mobile */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .navigation-container {
     position: relative;
     max-height: none;
-    margin-bottom: 3rem; /* Further increased margin for better separation */
+    margin-bottom: 2rem; /* Provide clear separation */
     /* Ensure the navigation is fully contained */
     overflow: visible;
+    width: 100%;
+    max-width: 100%;
   }
   
   /* Ensure navigation doesn't overlap content on small screens */
   .content-column {
-    margin-top: 1rem;
+    margin-top: 0;
+    padding-top: 1rem; /* Add padding to create space */
+    /* Ensure content doesn't get cut off */
+    min-height: calc(100vh - 200px); /* Account for navigation height */
+  }
+  
+  .main-grid {
+    gap: 1.5rem; /* Slightly larger gap on mobile */
   }
 }
 
@@ -235,6 +247,8 @@ button, .button {
   .content-container {
     padding: 0; /* Remove padding to rely on grid gap */
     margin: 0;
+    /* Ensure content is properly separated from navigation */
+    min-height: 100vh;
   }
   
   /* Ensure navigation stays in its column */
@@ -243,7 +257,7 @@ button, .button {
     top: 2rem;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
-    max-width: 100%;
+    max-width: 320px; /* Fixed max width */
     /* Ensure navigation doesn't interfere with content */
     z-index: 10;
   }
@@ -252,6 +266,10 @@ button, .button {
   .content-column {
     margin-left: 0; /* Let grid handle spacing */
     padding-left: 0;
+    /* Ensure content stays in its column */
+    overflow-x: hidden;
+    width: 100%;
+    min-width: 0; /* Allow content to shrink */
   }
 }
 
@@ -265,6 +283,9 @@ button, .button {
   min-height: 200px;
   opacity: 1;
   transform: translateY(0);
+  /* Add specific isolation context */
+  contain: layout style;
+  position: relative;
 }
 
 .section-transition.loading {
@@ -302,13 +323,17 @@ button, .button {
   grid-template-columns: 1fr;
   width: 100%;
   align-items: start;
+  /* Ensure grid doesn't cause overflow issues */
+  min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .main-grid {
-    grid-template-columns: minmax(280px, 320px) 1fr;
-    gap: 3rem; /* Increased gap to prevent overlap */
+    grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
+    gap: 2rem; /* Optimal gap to prevent overlap */
     align-items: start;
+    /* Ensure proper layout containment */
+    overflow: hidden;
   }
 }
 
@@ -354,6 +379,9 @@ button, .button {
   overflow-x: hidden;
   word-wrap: break-word;
   box-sizing: border-box;
+  /* Add clear boundaries for cards */
+  position: relative;
+  isolation: isolate;
 }
 
 /* Fix any potential layout issues with long content */
@@ -362,6 +390,8 @@ button, .button {
   overflow-wrap: break-word;
   word-break: break-word;
   hyphens: auto;
+  /* Ensure prose content doesn't escape containers */
+  box-sizing: border-box;
 }
 
 /* Ensure tabs content doesn't overflow */
@@ -369,6 +399,14 @@ button, .button {
   overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
+  /* Add specific containment for tab content */
+  contain: layout;
+}
+
+/* Additional containment for complex components */
+.recharts-wrapper, .recharts-surface {
+  max-width: 100% !important;
+  overflow: hidden;
 }
 
 /* Mathematical display styling */

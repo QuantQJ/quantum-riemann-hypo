@@ -114,7 +114,7 @@ export function SusySection() {
   };
 
   return (
-    <MathJaxContext config={mathJaxConfig}>
+    <MathJaxContext>
       <div className="space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-primary mb-4">SUSY QM Integration & Analysis</h1>

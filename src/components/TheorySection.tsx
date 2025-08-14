@@ -21,7 +21,7 @@ const mathJaxConfig = {
 
 export function TheorySection() {
   return (
-    <MathJaxContext config={mathJaxConfig}>
+    <MathJaxContext>
       <div className="space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-primary mb-4">Rigorous Mathematical Framework</h1>

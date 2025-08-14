@@ -186,7 +186,7 @@ export function MathematicalWorkbench() {
   };
 
   return (
-    <MathJaxContext config={mathJaxConfig}>
+    <MathJaxContext>
       <div className="space-y-6">
         <Card>
           <CardHeader>

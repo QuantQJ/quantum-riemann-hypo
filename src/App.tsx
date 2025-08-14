@@ -35,7 +35,7 @@ function App() {
       case "about":
         return <AboutSection key="about" />;
       default:
-        return <OverviewSection key="overview" />;
+        return <OverviewSection key="overview" onSectionChange={handleSectionChange} />;
     }
   };
 
