@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitl
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, 
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { CheckCircle, AlertTriangle, Calculator } from '@phosphor-icons/react';
+import { MathJax, MathJaxContext } from 'better-react-mathjax';
 
+interface ConvergenceData {
   iteration: number;
   theoreticalBound: number;
+  actualError: number;
+}
 
-
-  CLeak: number;
-  CNode: number[];
-  eta0: number; // Initial 
-
-  const [alpha, setAlp
- 
-
-  // Rigorous constants from 
+interface RigorousConstants {
   CLeak: number;
   spectralGaps: number[];
   CNode: number[];
@@ -71,61 +68,45 @@ export function ConvergenceAnalysis() {
     const lambda = computeContractionFactor(alphaVal, betaVal);
     const isContractive = lambda < 1;
     
-        iteration: n,
-        theoreticalBound: Math.max(theoreticalBound, 1e
+    const data: ConvergenceData[] = [];
+    const initialError = 0.3; // Starting error magnitude
     
-    }
-  };
-  const analyzeConvergence = () => {
-    se
-      setContractionFactor
-      setConvergenceData(data);
-    }, 1500);
-
-    if 
+    for (let n = 0; n <= 10; n++) {
+      const theoreticalBound = initialError * Math.pow(lambda, n);
+      const actualError = isContractive 
+        ? theoreticalBound * (1 + 0.1 * Math.random()) // Add some noise
+        : theoreticalBound;
       
-  }, [alpha, beta]);
+      data.push({
+        iteration: n,
+        theoreticalBound: Math.max(theoreticalBound, 1e-8),
+        actualError: Math.max(actualError, 1e-8)
+      });
+    }
+    return data;
+  };
+
+  const analyzeConvergence = () => {
+    setIsAnalyzing(true);
+    setTimeout(() => {
+      const factor = computeContractionFactor(alpha, beta);
+      const data = simulateConvergence(alpha, beta);
+      setContractionFactor(factor);
+      setConvergenceData(data);
+      setIsAnalyzing(false);
+    }, 1500);
+  };
+
   useEffect(() => {
-  }, [
-  const bounds = 
+    analyzeConvergence();
+  }, [alpha, beta]);
 
+  const bounds = validateParameterBounds(alpha, beta);
+  const isContractiveRate = contractionFactor !== null && contractionFactor < 1;
+
+  return (
     <MathJaxContext>
-        <div className="text-center">
-          <p className="text-lg te
-          </p>
-
-     
-            <Car
-    
-
-            <div className="grid gri
-                <label cl
-                </labe
-                  type="range"
-                  max="0.5"
-                  value={alpha}
-                  className="w-
-              </div>
-             
-    
-
-                  m
-                  value={beta}
-                  className="w-full h-2 bg-gray-200 
-              </div>
-     
-              <div c
-
-                  <
-                <div clas
-         
-
-                      <p className="text-lg font-mono"
-                      </p>
-
-          
-                    
-                      </Badge>
+      <div className="space-y-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-foreground mb-2">Rigorous Convergence Analysis</h1>
           <p className="text-lg text-muted-foreground">
@@ -254,183 +235,111 @@ export function ConvergenceAnalysis() {
                   <h4 className="font-medium text-foreground">Overall Assessment</h4>
                 </div>
                 <p className={bounds.convergenceGuaranteed ? 'text-green-700' : 'text-red-700'}>
-                      {convergenceData[convergenceData.length - 1]?.actualEr
-                    <div className="text-sm text-muted-foreground
-                    </div>
-                  <
-                    
-                    <div
-                    </div>
-                </div>
-            </CardContent>
-        )}
-        {/* Mode Overlap Analysis */}
-          <CardHeader>
-          </CardHead
-            <div c
-          </CardContent>
-               
-
-                </div>
-        {convergenceData.length > 0 && (
-                
-            <CardHeader>
-                  </p>
-                <Card className="p-4 borde
-                  <p className=
-                  </p>
+                  {bounds.convergenceGuaranteed 
+                    ? 'Parameters guarantee exponential convergence'
+                    : 'Current parameters may not guarantee convergence'
+                  }
+                </p>
               </div>
-          </CardContent>
-
-        <Card className="border-ac
-            <CardTitle className="text-accent">Implementation Recommendations</CardT
-          <CardContent>
-              <div cla
-                <div>
-                  <p className="text-sm text-muted-foreground">
-                    α = 0.1 - {bounds.alphaUpperBoun
-                </div>
-              
-                <CheckCircle size={16} className="text-green-600 mt-0.5
-                  <h4 className="font-medium">Convergence Monitoring</h4>
-                    Track ||e
-                </div>
-                    />
-                <CheckCircle s
-                    <Line
-                    Ensure initial er
-                </div>
-
-                      strokeWidth={2}
-                </Badge>
-                    />
-              </div>
-          </CardContent>
-      </div>
-  );
-
-
-
-
-
-
-
-
-
-                    <div className="text-lg font-bold text-accent">
-
-                    </div>
-
-
-
-                  </Card>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-
-            </CardContent>
-
-        )}
-
-
-
-          <CardHeader>
-
-          </CardHeader>
-
-
-
-
-
-
-
-
-
-                </div>
-
-
-
-
-
-
-
-                  </p>
-
-
-
-
-
-
-
-              </div>
-
-          </CardContent>
-
-
-
-
-
-
-
-          <CardContent>
-
-              <div className="flex items-start gap-3">
-
-                <div>
-
-
-
-
-
-                </div>
-
-
-
-
-                <div>
-
-
-
-
-                </div>
-
-
-              <div className="flex items-start gap-3">
-
-                <div>
-
-
-
-
-                </div>
-
-
-
-
-
-
-
-
-
-
             </div>
-
+          </CardContent>
         </Card>
 
-    </MathJaxContext>
+        {/* Convergence Visualization */}
+        {convergenceData.length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Error Reduction Analysis</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={convergenceData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="iteration" />
+                    <YAxis scale="log" domain={['dataMin', 'dataMax']} />
+                    <Tooltip formatter={(value) => [(value as number).toExponential(3), '']} />
+                    <Line 
+                      type="monotone" 
+                      dataKey="theoreticalBound" 
+                      stroke="#8884d8" 
+                      strokeWidth={2}
+                      name="Theoretical Bound"
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="actualError" 
+                      stroke="#82ca9d" 
+                      strokeWidth={2}
+                      strokeDasharray="5 5"
+                      name="Simulated Error"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              
+              {convergenceData.length > 0 && (
+                <div className="mt-4 p-4 bg-muted rounded-lg">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Final Error (10 iterations)</p>
+                      <p className="text-lg font-mono">
+                        {convergenceData[convergenceData.length - 1]?.actualError.toExponential(3)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Reduction Factor</p>
+                      <p className="text-lg font-mono">
+                        {(convergenceData[0]?.actualError / convergenceData[convergenceData.length - 1]?.actualError).toExponential(2)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
 
+        {/* Implementation Recommendations */}
+        <Card className="border-accent">
+          <CardHeader>
+            <CardTitle className="text-accent">Implementation Recommendations</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle size={16} className="text-green-600 mt-0.5" />
+                <div>
+                  <h4 className="font-medium">Optimal Parameter Range</h4>
+                  <p className="text-sm text-muted-foreground">
+                    α = 0.1 - {bounds.alphaUpperBound.toFixed(3)}, β ≥ {bounds.betaLowerBound.toFixed(1)}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <CheckCircle size={16} className="text-green-600 mt-0.5" />
+                <div>
+                  <h4 className="font-medium">Convergence Monitoring</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Track ||e⁽ⁿ⁾||∞ ≤ Λⁿ||e⁽⁰⁾||∞ for validation
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle size={16} className="text-green-600 mt-0.5" />
+                <div>
+                  <h4 className="font-medium">Basin of Attraction</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Ensure initial error ||e⁽⁰⁾||∞ ≤ δ_min/2 = {constants.deltaMin / 2}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </MathJaxContext>
+  );
 }
