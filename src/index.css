@@ -156,7 +156,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   scrollbar-width: thin;
   scrollbar-color: oklch(0.88 0.01 240) transparent;
   width: 100%;
-  max-width: 300px; /* Constrain max width */
+  max-width: 320px; /* Increased max width but still constrained */
 }
 
 .navigation-container::-webkit-scrollbar {
@@ -174,15 +174,16 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 
 .content-container {
   min-height: 100vh;
-  padding-left: 0; /* Reset padding */
-  margin-left: 0; /* Reset margin */
+  padding: 0;
+  margin: 0;
+  /* Clear spacing to prevent issues */
 }
 
 @media (max-width: 1024px) {
   .content-container {
-    padding-left: 0;
-    margin-top: 1rem;
-    margin-left: 0;
+    padding: 0;
+    margin-top: 1.5rem;
+    /* Ensure separation from navigation on mobile */
   }
   
   .navigation-container {
@@ -195,8 +196,8 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 /* Fix spacing for larger screens to prevent overlap */
 @media (min-width: 1024px) {
   .content-container {
-    padding-left: 2rem; /* More padding to ensure separation from navigation */
-    margin-left: 0;
+    padding: 0; /* Remove padding to rely on grid gap */
+    margin: 0;
   }
   
   /* Ensure navigation stays in its column */
@@ -206,11 +207,17 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
     max-width: 100%;
+    /* Ensure navigation doesn't interfere with content */
+    z-index: 10;
   }
 }
 
 .section-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Ensure proper containment */
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* Ensure navigation buttons don't wrap text awkwardly */
@@ -239,15 +246,17 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 /* Enhanced grid layout with proper constraints */
 .main-grid {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
   grid-template-columns: 1fr;
   width: 100%;
+  align-items: start;
 }
 
 @media (min-width: 1024px) {
   .main-grid {
-    grid-template-columns: minmax(250px, 300px) 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(280px, 320px) 1fr;
+    gap: 2rem;
+    align-items: start;
   }
 }
 
@@ -260,6 +269,9 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   width: 100%;
   min-width: 0;
   overflow-x: hidden;
+  /* Ensure content doesn't overlap with navigation */
+  position: relative;
+  z-index: 1;
 }
 
 /* Quantum-inspired gradient backgrounds for special cards */
