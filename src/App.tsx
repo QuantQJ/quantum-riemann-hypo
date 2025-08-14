@@ -14,24 +14,28 @@ import { Toaster } from "@/components/ui/sonner";
 function App() {
   const [activeSection, setActiveSection] = useKV("active-section", "overview");
 
+  const handleSectionChange = (section: string) => {
+    setActiveSection(section);
+  };
+
   const renderSection = () => {
     switch (activeSection) {
       case "theory":
-        return <TheorySection />;
+        return <TheorySection key="theory" />;
       case "parameters":
-        return <ParametersSection />;
+        return <ParametersSection key="parameters" />;
       case "susy":
-        return <SusySection />;
+        return <SusySection key="susy" />;
       case "verification":
-        return <VerificationSection />;
+        return <VerificationSection key="verification" />;
       case "visualization":
-        return <ZeroVisualization />;
+        return <ZeroVisualization key="visualization" />;
       case "workbench":
-        return <MathematicalWorkbench />;
+        return <MathematicalWorkbench key="workbench" />;
       case "about":
-        return <AboutSection />;
+        return <AboutSection key="about" />;
       default:
-        return <OverviewSection />;
+        return <OverviewSection key="overview" />;
     }
   };
 
@@ -43,7 +47,7 @@ function App() {
             <div className="navigation-container">
               <Navigation 
                 activeSection={activeSection} 
-                onSectionChange={setActiveSection} 
+                onSectionChange={handleSectionChange} 
               />
             </div>
           </div>

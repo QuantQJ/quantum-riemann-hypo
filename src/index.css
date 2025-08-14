@@ -11,10 +11,11 @@ html, body {
 }
 
 /* Ensure all text content respects boundaries */
-p, div, span, h1, h2, h3, h4, h5, h6 {
+p, div, span, h1, h2, h3, h4, h5, h6, li, td, th {
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  max-width: 100%;
 }
 
 /* Prevent code blocks from overflowing */
@@ -22,6 +23,29 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   overflow-x: auto;
   white-space: pre-wrap;
   word-break: break-all;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Force long mathematical expressions to wrap */
+.math-display, .math-inline {
+  overflow-wrap: break-word;
+  word-break: break-all;
+  max-width: 100%;
+}
+
+/* Ensure tables don't overflow */
+table {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+/* Fix button text wrapping */
+button, .button {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 @layer base {
@@ -157,6 +181,8 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   scrollbar-color: oklch(0.88 0.01 240) transparent;
   width: 100%;
   max-width: 320px; /* Increased max width but still constrained */
+  /* Ensure proper containment */
+  box-sizing: border-box;
 }
 
 .navigation-container::-webkit-scrollbar {
@@ -177,19 +203,30 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
   /* Clear spacing to prevent issues */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 @media (max-width: 1024px) {
   .content-container {
     padding: 0;
-    margin-top: 1.5rem;
+    margin-top: 2rem; /* Increased margin to prevent overlap */
     /* Ensure separation from navigation on mobile */
   }
   
   .navigation-container {
     position: relative;
     max-height: none;
-    margin-bottom: 2rem; /* Increased margin for better separation */
+    margin-bottom: 3rem; /* Further increased margin for better separation */
+    /* Ensure the navigation is fully contained */
+    overflow: visible;
+  }
+  
+  /* Ensure navigation doesn't overlap content on small screens */
+  .content-column {
+    margin-top: 1rem;
   }
 }
 
@@ -210,6 +247,12 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
     /* Ensure navigation doesn't interfere with content */
     z-index: 10;
   }
+  
+  /* Prevent content from wrapping under navigation */
+  .content-column {
+    margin-left: 0; /* Let grid handle spacing */
+    padding-left: 0;
+  }
 }
 
 .section-transition {
@@ -218,6 +261,15 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   width: 100%;
   min-width: 0;
   overflow-x: hidden;
+  /* Prevent layout shift during transitions */
+  min-height: 200px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-transition.loading {
+  opacity: 0.7;
+  transform: translateY(10px);
 }
 
 /* Ensure navigation buttons don't wrap text awkwardly */
@@ -255,7 +307,7 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 @media (min-width: 1024px) {
   .main-grid {
     grid-template-columns: minmax(280px, 320px) 1fr;
-    gap: 2rem;
+    gap: 3rem; /* Increased gap to prevent overlap */
     align-items: start;
   }
 }
@@ -263,6 +315,8 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
 .navigation-column {
   width: 100%;
   min-width: 0;
+  /* Ensure navigation is contained */
+  max-width: 100%;
 }
 
 .content-column {
@@ -272,6 +326,8 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   /* Ensure content doesn't overlap with navigation */
   position: relative;
   z-index: 1;
+  /* Add extra margin on smaller screens to prevent overlap */
+  margin-top: 0;
 }
 
 /* Quantum-inspired gradient backgrounds for special cards */
@@ -293,6 +349,28 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   border: 1px solid oklch(0.65 0.25 35 / 0.3);
 }
 
+/* Ensure all cards have proper containment */
+.card, [data-radix-card] {
+  overflow-x: hidden;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Fix any potential layout issues with long content */
+.prose, .prose * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Ensure tabs content doesn't overflow */
+[data-radix-tabs-content] {
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* Mathematical display styling */
 .math-display {
   display: block;
@@ -301,30 +379,52 @@ p, div, span, h1, h2, h3, h4, h5, h6 {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.1em;
   line-height: 1.6;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0.5rem;
 }
 
 .math-inline {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.05em;
+  white-space: nowrap;
 }
 
 .mathjax-context {
   line-height: 1.6;
+  overflow-x: auto;
 }
 
 .frac {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
+  line-height: 1;
 }
 
 .frac .num {
   display: block;
   border-bottom: 1px solid currentColor;
   padding-bottom: 0.1em;
+  font-size: 0.9em;
 }
 
 .frac .den {
   display: block;
   padding-top: 0.1em;
+  font-size: 0.9em;
+}
+
+/* Responsive mathematical content */
+@media (max-width: 640px) {
+  .math-display {
+    font-size: 0.9em;
+    margin: 0.5em 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  
+  .math-inline {
+    font-size: 1em;
+  }
 }

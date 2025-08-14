@@ -16,28 +16,28 @@ const demoResults = [
 const keyFindings = [
   {
     title: "Spectral Tautology",
-    value: "&rho; = 0.999",
-    description: "G&ouml;delian loop: zeros define spectrum that locates zeros",
+    value: "ρ = 0.999",
+    description: "Gödelian loop: zeros define spectrum that locates zeros",
     icon: <TrendingUp size={20} />,
     color: "text-primary"
   },
   {
     title: "SUSY Preservation",
-    value: "&Delta; &asymp; 0",
+    value: "Δ ≈ 0",
     description: "Witten index confirms unbroken supersymmetry",
     icon: <Zap size={20} />,
     color: "text-blue-600"
   },
   {
     title: "Contraction Bound",
-    value: "&Lambda;(&alpha;,&beta;) &lt; 1",
+    value: "Λ(α,β) < 1",
     description: "Rigorous linear convergence with explicit rates",
     icon: <Target size={20} />,
     color: "text-green-600"
   },
   {
     title: "Mode Overlap",
-    value: "&eta;<sub>0</sub> &gt; 0",
+    value: "η₀ > 0",
     description: "Non-vanishing overlap ensures basin attraction",
     icon: <CheckCircle size={20} />,
     color: "text-orange-600"
@@ -56,7 +56,7 @@ export function OverviewSection() {
           </blockquote>
           <div className="mathematical-content text-center py-4 spectral-emphasis">
             <div className="text-xl font-mono font-semibold text-primary">
-              E<sub>k</sub> = (&hbar;&sup2;/2m) &laquo;(1/2, &gamma;<sub>k</sub>)&raquo;&sup2;
+              E<sub>k</sub> = (ℏ²/2m) ‖(1/2, γ<sub>k</sub>)‖²
             </div>
             <div className="text-sm text-muted-foreground mt-2">
               The spectral tautology: eigenvalues encoded by zero coordinates
@@ -71,23 +71,23 @@ export function OverviewSection() {
         {/* Opening Paragraph */}
         <div className="text-left max-w-5xl mx-auto mb-8 prose prose-lg">
           <p className="text-muted-foreground leading-relaxed">
-            The Riemann Hypothesis—asserting that all nontrivial zeros of &zeta;(<em>s</em>) lie on Re(<em>s</em>) = 1/2—emerges here as a <strong className="text-primary">spectral tautology</strong>: a quantum Hamiltonian <em>H</em>, designed to expose these zeros, <strong>derives its eigenvalues directly from their Euclidean coordinates</strong>:
+            The Riemann Hypothesis—asserting that all nontrivial zeros of ζ(<em>s</em>) lie on Re(<em>s</em>) = 1/2—emerges here as a <strong className="text-primary">spectral tautology</strong>: a quantum Hamiltonian <em>H</em>, designed to expose these zeros, <strong>derives its eigenvalues directly from their Euclidean coordinates</strong>:
           </p>
           <div className="mathematical-content my-4">
             <div className="text-center">
-              E<sub>k</sub> = (&hbar;&sup2;/2m)(1/4 + &gamma;<sub>k</sub>&sup2;)
+              E<sub>k</sub> = (ℏ²/2m)(1/4 + γ<sub>k</sub>²)
             </div>
-            <p className="text-sm text-muted-foreground mt-2">where &gamma;<sub>k</sub> are the zeros' imaginary parts</p>
+            <p className="text-sm text-muted-foreground mt-2">where γ<sub>k</sub> are the zeros' imaginary parts</p>
           </div>
           <p className="text-muted-foreground leading-relaxed">
-            This is a <strong className="text-scientific-purple">G&ouml;delian loop</strong>: the zeros define <em>H</em>'s spectrum, while <em>H</em>'s spectral projectors reconstruct their locations—binding analytic number theory to spectral geometry via the norm &laquo;(1/2, &gamma;<sub>k</sub>)&raquo;. <strong>Proving the Riemann Hypothesis reduces to showing that <em>H</em>'s spectrum encodes only these critical-line zeros</strong>—a self-validating cycle where spectral existence implies truth.
+            This is a <strong className="text-scientific-purple">Gödelian loop</strong>: the zeros define <em>H</em>'s spectrum, while <em>H</em>'s spectral projectors reconstruct their locations—binding analytic number theory to spectral geometry via the norm ‖(1/2, γ<sub>k</sub>)‖. <strong>Proving the Riemann Hypothesis reduces to showing that <em>H</em>'s spectrum encodes only these critical-line zeros</strong>—a self-validating cycle where spectral existence implies truth.
           </p>
         </div>
 
         {/* Mechanism Paragraph */}
         <div className="text-left max-w-5xl mx-auto mb-8">
           <p className="text-muted-foreground leading-relaxed">
-            To realize this loop, we construct <em>H</em> from the prime-counting function &pi;(<em>x</em>) and its logarithmic integral Li(<em>x</em>). The resulting <strong className="text-accent">prime-driven quantum feedback potential</strong> generates a spectral operator whose eigenvalues are <em>exactly</em> the squares 1/4 + &gamma;<sub>k</sub>&sup2;—<strong>transforming the hunt for zeros into a convergence problem for its spectral flow</strong>.
+            To realize this loop, we construct <em>H</em> from the prime-counting function π(<em>x</em>) and its logarithmic integral Li(<em>x</em>). The resulting <strong className="text-accent">prime-driven quantum feedback potential</strong> generates a spectral operator whose eigenvalues are <em>exactly</em> the squares 1/4 + γ<sub>k</sub>²—<strong>transforming the hunt for zeros into a convergence problem for its spectral flow</strong>.
           </p>
         </div>
 
@@ -155,8 +155,8 @@ export function OverviewSection() {
               <div>
                 <h4 className="font-semibold mb-2 text-accent">Contraction Dynamics</h4>
                 <p className="text-sm text-muted-foreground">
-                  Rigorous Λ(α,β) &lt; 1 bounds ensure linear convergence from any prime-structured 
-                  initial state, with mode overlap η<sub>0</sub> &gt; 0 preventing spectral degeneracy.
+                  Rigorous Λ(α,β) < 1 bounds ensure linear convergence from any prime-structured 
+                  initial state, with mode overlap η<sub>0</sub> > 0 preventing spectral degeneracy.
                 </p>
               </div>
             </div>
@@ -193,15 +193,15 @@ export function OverviewSection() {
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="p-4 bg-primary/5">
               <h4 className="font-medium text-primary mb-2">Theorem 2: Spectral Reduction</h4>
-              <p className="text-sm">Establishes tautological eigenvalue structure: E<sub>k</sub> = &hbar;&sup2;/2m(1/4 + &gamma;<sub>k</sub>&sup2;) from prime oscillations</p>
+              <p className="text-sm">Establishes tautological eigenvalue structure: E<sub>k</sub> = ℏ²/2m(1/4 + γ<sub>k</sub>²) from prime oscillations</p>
             </Card>
             <Card className="p-4 bg-green-500/5">
               <h4 className="font-medium text-green-600 mb-2">Theorem 3: Contraction Mapping</h4>
-              <p className="text-sm">Rigorous bounds &Lambda;(&alpha;,&beta;) &lt; 1 ensure linear convergence with explicit parameter windows</p>
+              <p className="text-sm">Rigorous bounds Λ(α,β) < 1 ensure linear convergence with explicit parameter windows</p>
             </Card>
             <Card className="p-4 bg-blue-500/5">
               <h4 className="font-medium text-blue-600 mb-2">Theorem 4: Mode Overlap Convergence</h4>
-              <p className="text-sm">Polyak-&Lstrok;ojasiewicz conditions from &eta;<sub>0</sub> &gt; 0 guarantee convergence basin entry</p>
+              <p className="text-sm">Polyak-Łojasiewicz conditions from η<sub>0</sub> > 0 guarantee convergence basin entry</p>
             </Card>
           </div>
 
