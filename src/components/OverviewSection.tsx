@@ -201,7 +201,7 @@ export function OverviewSection({ onSectionChange }: OverviewSectionProps = {}) 
             </Card>
             <Card className="p-4 bg-green-500/5">
               <h4 className="font-medium text-green-600 mb-2">Theorem 3: Contraction Mapping</h4>
-              <p className="text-sm">Rigorous bounds Λ(α,β) < 1 ensure linear convergence with explicit parameter windows</p>
+              <p className="text-sm">Rigorous bounds Λ(α,β) &lt; 1 ensure linear convergence with explicit parameter windows</p>
             </Card>
             <Card className="p-4 bg-blue-500/5">
               <h4 className="font-medium text-blue-600 mb-2">Theorem 4: Mode Overlap Convergence</h4>
