@@ -462,7 +462,7 @@ export function ParametersSection() {
               <p className="text-sm">
                 When Λ(α,β) &lt; 1, Theorem 3 guarantees exponential convergence:
                 <br />
-                <span className="font-mono">||e^{'{'}(n){'}')||_∞ ≤ λⁿ ||e^{'{'}(0){'}'||_∞ with λ = {currentData ? currentData.contractionFactor.toFixed(3) : 'N/A'}</span>
+                <span className="font-mono">||e^{'{'}(n){'}'} ||_∞ ≤ λⁿ ||e^{'{'}(0){'}'} ||_∞ with λ = {currentData ? currentData.contractionFactor.toFixed(3) : 'N/A'}</span>
               </p>
             </div>
           </div>

@@ -324,7 +324,7 @@ export function TheorySection() {
             <div className="mt-6 p-4 bg-accent/10 rounded-lg">
               <p className="text-sm text-center">
                 <strong>Combined Result:</strong> Any quantum system with non-vanishing modal overlap and properly chosen 
-                parameters (α,β) will converge exponentially to the Riemann zeta zeros with rate λ = Λ(α,β) < 1.
+                parameters (α,β) will converge exponentially to the Riemann zeta zeros with rate λ = Λ(α,β) &lt; 1.
               </p>
             </div>
           </CardContent>

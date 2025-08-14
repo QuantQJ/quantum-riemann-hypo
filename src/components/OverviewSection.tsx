@@ -155,7 +155,7 @@ export function OverviewSection() {
               <div>
                 <h4 className="font-semibold mb-2 text-accent">Contraction Dynamics</h4>
                 <p className="text-sm text-muted-foreground">
-                  Rigorous Λ(α,β) < 1 bounds ensure linear convergence from any prime-structured 
+                  Rigorous Λ(α,β) &lt; 1 bounds ensure linear convergence from any prime-structured 
                   initial state, with mode overlap η₀ > 0 preventing spectral degeneracy.
                 </p>
               </div>
