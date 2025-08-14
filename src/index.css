@@ -210,9 +210,28 @@ button, .button {
 }
 
 @media (max-width: 1024px) {
+  .main-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .navigation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+    z-index: 50;
+    max-height: none;
+    overflow: visible;
+  }
+  
   .content-container {
+    margin-top: 120px; /* Space for fixed navigation */
     padding: 1.5rem;
-    margin-top: 8rem; /* Even more separation on mobile */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -220,108 +239,62 @@ button, .button {
     z-index: 1;
   }
   
-  .navigation-container {
-    position: relative;
-    max-height: none;
-    margin-bottom: 8rem; /* Much larger separation buffer */
-    overflow: visible;
-    width: 100%;
-    max-width: 100%;
-    z-index: 10; /* Higher z-index for navigation */
-    background: var(--background);
-    padding-bottom: 4rem; /* Larger padding buffer */
-  }
-  
-  /* Ensure navigation doesn't overlap content on small screens */
   .content-column {
-    margin-top: 8rem; /* Much larger separation from navigation */
-    padding-top: 4rem;
-    min-height: calc(100vh - 300px);
-    clear: both; /* Ensure content clears any floated navigation */
+    width: 100%;
     position: relative;
     z-index: 1;
-  }
-  
-  .main-grid {
-    gap: 8rem; /* Maximum gap on mobile for complete separation */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Add a visual separator between navigation and content */
-  .navigation-container::after {
-    content: '';
-    position: absolute;
-    bottom: -2rem;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      oklch(0.88 0.01 240) 50%, 
-      transparent 100%);
   }
 }
 
 /* Fix spacing for larger screens to prevent overlap */
 @media (min-width: 1024px) {
+  .main-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    align-items: start;
+    overflow: hidden;
+  }
+  
   .content-container {
-    padding: 2.5rem; /* Increased padding for better spacing */
+    padding: 2rem;
     margin: 0;
     min-height: 100vh;
     position: relative;
     z-index: 1;
+    width: 100%;
+    overflow-x: hidden;
   }
   
-  /* Ensure navigation stays in its column */
   .navigation-container {
     position: sticky;
     top: 2rem;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
     max-width: 320px;
-    /* Clear separation from content */
-    margin-right: 6rem; /* Maximum margin for complete separation */
-    z-index: 10; /* Higher z-index for navigation */
+    z-index: 10;
     background: var(--background);
   }
   
-  /* Prevent content from wrapping under navigation */
   .content-column {
-    margin-left: 0;
-    padding-left: 6rem; /* Maximum padding for separation */
-    overflow-x: hidden;
     width: 100%;
     min-width: 0;
+    overflow-x: hidden;
     position: relative;
     z-index: 1;
-  }
-  
-  .main-grid {
-    grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
-    gap: 8rem; /* Maximum gap to prevent any overlap */
-    align-items: start;
-    overflow: hidden;
   }
 }
 
 .section-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Ensure proper containment */
   width: 100%;
   min-width: 0;
   overflow-x: hidden;
-  /* Prevent layout shift during transitions */
   min-height: 200px;
   opacity: 1;
   transform: translateY(0);
-  /* Add specific isolation context */
   contain: layout style;
   position: relative;
-  /* Add safe margins to prevent overlapping */
-  margin-top: 2rem;
-  padding: 2rem 0;
-  /* Ensure complete isolation from navigation */
   z-index: 2;
   background: var(--background);
 }
@@ -361,14 +334,14 @@ button, .button {
   grid-template-columns: 1fr;
   width: 100%;
   align-items: start;
-  /* Ensure grid doesn't cause overflow issues */
   min-width: 0;
 }
 
 @media (min-width: 1024px) {
   .main-grid {
-    grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
-    gap: 8rem; /* Maximum gap to prevent any overlap */
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
     align-items: start;
     overflow: hidden;
   }
@@ -385,11 +358,8 @@ button, .button {
   width: 100%;
   min-width: 0;
   overflow-x: hidden;
-  /* Ensure content doesn't overlap with navigation */
   position: relative;
   z-index: 1;
-  /* Add extra margin on smaller screens to prevent overlap */
-  margin-top: 0;
 }
 
 /* Quantum-inspired gradient backgrounds for special cards */
@@ -492,19 +462,29 @@ button, .button {
 
 /* Additional mobile layout improvements */
 @media (max-width: 768px) {
-  .content-container {
+  .navigation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
     padding: 1rem;
-    margin-top: 12rem; /* Maximum margin for very small screens */
+    z-index: 50;
+    max-height: auto;
   }
   
-  .navigation-container {
-    margin-bottom: 12rem; /* Maximum separation on small screens */
-    padding-bottom: 6rem;
+  .content-container {
+    padding: 1rem;
+    margin-top: 100px; /* Space for fixed navigation */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   
   .section-transition {
-    margin-top: 6rem;
-    padding: 6rem 0;
+    margin-top: 0;
+    padding: 0;
   }
   
   /* Responsive mathematical content for small screens */
@@ -522,12 +502,23 @@ button, .button {
 
 /* Tablet specific adjustments */
 @media (min-width: 769px) and (max-width: 1023px) {
-  .content-container {
-    padding: 2rem;
-    margin-top: 4rem;
+  .navigation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem;
+    z-index: 50;
+    max-height: auto;
   }
   
-  .navigation-container {
-    margin-bottom: 4rem;
+  .content-container {
+    padding: 2rem;
+    margin-top: 120px; /* Space for fixed navigation */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 }
