@@ -12,26 +12,31 @@
 }
 
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.2 0.05 240);
+  /* Quantum-inspired color scheme */
+  --background: oklch(0.98 0.01 240);
+  --foreground: oklch(0.15 0.05 240);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
+  --card-foreground: oklch(0.12 0.02 240);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.25 0.1 240);
+  --popover-foreground: oklch(0.12 0.02 240);
+  --primary: oklch(0.25 0.15 260); /* Deep quantum blue */
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0 0);
-  --secondary-foreground: oklch(0.3 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.7 0.15 60);
-  --accent-foreground: oklch(0.2 0.05 240);
-  --destructive: oklch(0.6 0.2 15);
+  --secondary: oklch(0.94 0.02 240);
+  --secondary-foreground: oklch(0.25 0.05 240);
+  --muted: oklch(0.96 0.01 240);
+  --muted-foreground: oklch(0.45 0.02 240);
+  --accent: oklch(0.65 0.25 35); /* Scientific gold */
+  --accent-foreground: oklch(0.15 0.05 240);
+  --destructive: oklch(0.55 0.2 15);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.25 0.1 240);
+  --border: oklch(0.88 0.01 240);
+  --input: oklch(0.88 0.01 240);
+  --ring: oklch(0.25 0.15 260);
   --radius: 0.5rem;
+
+  /* Scientific purple for theoretical sections */
+  --scientific-purple: oklch(0.3 0.15 290);
+  --scientific-purple-foreground: oklch(1 0 0);
 }
 
 @theme {
@@ -60,18 +65,41 @@
   --radius-lg: calc(var(--radius) * 1.5);
   --radius-xl: calc(var(--radius) * 2);
   --radius-2xl: calc(var(--radius) * 3);
+  --color-scientific-purple: var(--scientific-purple);
+  --color-scientific-purple-foreground: var(--scientific-purple-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.5);
+  --radius-xl: calc(var(--radius) * 2);
+  --radius-2xl: calc(var(--radius) * 3);
   --radius-full: 9999px;
 }
 
 .mathematical-content {
   font-family: 'JetBrains Mono', 'Consolas', monospace;
   font-size: 14px;
-  line-height: 1.5;
-  background: oklch(0.99 0 0);
-  border: 1px solid oklch(0.92 0 0);
+  line-height: 1.6;
+  background: oklch(0.99 0.01 260);
+  border: 1px solid oklch(0.9 0.02 260);
   border-radius: var(--radius);
   padding: 16px;
   overflow-x: auto;
+  position: relative;
+}
+
+.mathematical-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    oklch(0.25 0.15 260), 
+    oklch(0.3 0.15 290)
+  );
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
 }
 
 .section-transition {
@@ -80,5 +108,25 @@
 
 .hover-lift:hover {
   transform: translateY(-2px);
-  transition: transform 0.2s ease-out;
+  box-shadow: 0 8px 25px -5px oklch(0.25 0.15 260 / 0.1);
+  transition: all 0.2s ease-out;
+}
+
+/* Quantum-inspired gradient backgrounds for special cards */
+.quantum-gradient {
+  background: linear-gradient(135deg, 
+    oklch(0.98 0.01 240) 0%,
+    oklch(0.96 0.02 260) 50%,
+    oklch(0.98 0.01 280) 100%
+  );
+}
+
+/* Parameter control enhancements */
+.parameter-optimal {
+  background: linear-gradient(90deg, 
+    oklch(0.65 0.25 35 / 0.1), 
+    oklch(0.65 0.25 35 / 0.2), 
+    oklch(0.65 0.25 35 / 0.1)
+  );
+  border: 1px solid oklch(0.65 0.25 35 / 0.3);
 }
