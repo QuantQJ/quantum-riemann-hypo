@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
-import { Activity, Eye, BarChart3, Zap } from '@phosphor-icons/react';
+import { Activity, Eye, ChartBar, Lightning } from '@phosphor-icons/react';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
 
 interface ZeroPoint {
@@ -221,7 +221,7 @@ export function ZeroVisualization() {
       <Tabs defaultValue="wavefunction" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="wavefunction" className="flex items-center gap-1">
-            <Zap size={14} />
+            <Lightning size={14} />
             Wavefunction
           </TabsTrigger>
           <TabsTrigger value="zeros" className="flex items-center gap-1">
@@ -229,7 +229,7 @@ export function ZeroVisualization() {
             Zero Detection
           </TabsTrigger>
           <TabsTrigger value="spectral" className="flex items-center gap-1">
-            <BarChart3 size={14} />
+            <ChartBar size={14} />
             Spectral Analysis
           </TabsTrigger>
           <TabsTrigger value="comparison" className="flex items-center gap-1">
