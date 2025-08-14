@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, BookOpen, FileText, User } from "@phosphor-icons/react";
 
 export function ReferencesSection() {
+  const handleAddReference = () => {
+    const reference = prompt("Enter reference in format: Author(s). (Year). Title. Journal/Source.");
+    if (reference) {
+      // In a real app, this would be saved to state/database
+      alert(`Reference added: ${reference}`);
+    }
+  };
   const references = [
     {
       id: "riemann1859",
@@ -241,6 +248,15 @@ export function ReferencesSection() {
             </h1>
           </div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Academic sources, mathematical references, and research foundations for the quantum Riemann approach
+          </p>
+          <div className="flex justify-center">
+            <Button onClick={handleAddReference} className="flex items-center gap-2">
+              <FileText size={16} />
+              Add Reference
+            </Button>
+          </div>
+        </div>
             A comprehensive bibliography spanning the historical development, theoretical foundations, 
             and modern computational approaches to the Riemann Hypothesis and related mathematical physics.
           </p>

@@ -458,34 +458,98 @@ export function AboutSection() {
             <Card className="quantum-gradient">
               <CardHeader>
                 <div className="flex items-start gap-4">
-                  <div className="h-16 w-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xl font-bold">
-                    JS
+                  <div className="h-20 w-20 bg-gradient-to-br from-primary to-accent text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg">
+                    JM
                   </div>
                   <div className="flex-1">
-                    <CardTitle className="text-2xl mb-2">Hello, my name is James</CardTitle>
-                    <p className="text-muted-foreground">
-                      Researcher in Quantum Mathematics and Number Theory
+                    <CardTitle className="text-3xl mb-2 text-primary">Hello, my name is James</CardTitle>
+                    <p className="text-lg text-muted-foreground mb-2">
+                      Independent Researcher in Mathematical Physics
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Exploring quantum approaches to number theory and the Riemann Hypothesis
                     </p>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-base leading-relaxed">
-                  I've been working on some fascinating thoughts about the connection between quantum mechanics 
-                  and the Riemann Hypothesis. This research represents years of exploration into how quantum 
-                  systems might naturally encode the deepest mysteries of prime numbers.
-                </p>
-                <p className="text-base leading-relaxed">
-                  What started as curiosity about spectral theory has evolved into a comprehensive framework 
-                  that bridges abstract mathematics with physical quantum systems. The idea that the Riemann 
-                  zeros might emerge as natural resonances in quantum Hamiltonians has profound implications 
-                  for both number theory and quantum physics.
-                </p>
-                <div className="mt-6 p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
-                  <p className="text-sm italic text-muted-foreground">
-                    "The most beautiful thing we can experience is the mysterious. It is the source of all true art and science." 
-                    <span className="font-medium">— Albert Einstein</span>
+              <CardContent className="space-y-6">
+                <div className="prose prose-sm max-w-none">
+                  <p className="text-base leading-relaxed">
+                    I've been working on some fascinating thoughts about the deep connection between quantum mechanics 
+                    and the mysteries of prime numbers. This research journey began with a simple question: 
+                    <em>What if the Riemann zeros aren't just mathematical abstractions, but natural resonances 
+                    in quantum systems?</em>
                   </p>
+                  
+                  <p className="text-base leading-relaxed">
+                    Over the past several years, I've developed what I call the "spectral tautology" framework—
+                    a quantum mechanical approach where the Riemann zeros define the spectrum of a Hamiltonian 
+                    that was constructed specifically to find them. It's a beautiful self-referential loop that 
+                    bridges abstract number theory with physical quantum dynamics.
+                  </p>
+                  
+                  <p className="text-base leading-relaxed">
+                    What excites me most about this work is how it transforms the search for Riemann zeros 
+                    from an abstract mathematical problem into a concrete quantum evolution process. 
+                    The mathematics becomes <em>physical</em>, and the physics reveals hidden mathematical truths.
+                  </p>
+                </div>
+                
+                <div className="mt-8 p-6 bg-gradient-to-r from-accent/10 to-primary/10 rounded-lg border-l-4 border-accent">
+                  <blockquote className="text-lg italic text-foreground mb-3">
+                    "The most beautiful thing we can experience is the mysterious. 
+                    It is the source of all true art and science."
+                  </blockquote>
+                  <cite className="text-sm text-muted-foreground font-medium">— Albert Einstein</cite>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    This quote has guided my research philosophy: embracing mystery as the gateway to discovery.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6 mt-8">
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold text-primary">Research Philosophy</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-accent rounded-full mt-1.5"></div>
+                        <span>Mathematics should be experimentally verifiable</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-accent rounded-full mt-1.5"></div>
+                        <span>Physical intuition can guide pure mathematics</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-accent rounded-full mt-1.5"></div>
+                        <span>Computational validation is essential</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-accent rounded-full mt-1.5"></div>
+                        <span>Open science accelerates discovery</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <h3 className="text-lg font-semibold text-primary">Current Focus</h3>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
+                        <span>Quantum feedback control theory</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
+                        <span>Supersymmetric quantum mechanics</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
+                        <span>Spectral analysis of number theory</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-1.5"></div>
+                        <span>Interactive mathematical visualization</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </CardContent>
             </Card>
