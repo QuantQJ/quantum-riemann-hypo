@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { CheckCircle, AlertTriangle, Calculator } from '@phosphor-icons/react';
@@ -27,6 +26,9 @@ export function ConvergenceAnalysis() {
   const [convergenceData, setConvergenceData] = useState<ConvergenceData[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   
+  const [convergenceData, setConvergenceData] = useState<ConvergenceData[]>([]);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  
   // Rigorous constants from the mathematical framework
   const constants: RigorousConstants = {
     CLeak: 4,
@@ -50,9 +52,6 @@ export function ConvergenceAnalysis() {
   const validateParameterBounds = (alphaVal: number, betaVal: number) => {
     // β lower bound for leakage suppression
     const betaLowerBound = (4 / (constants.deltaMin ** 2)) * Math.log(2 * constants.CLeak / 0.1);
-    // Upper bound for α for each mode
-    const alphaUpperBounds = constants.spectralGaps.map((gap, k) => 
-      ((1 - 0.1) * gap) / (1.213 * constants.CNode[k] * Math.sqrt(betaVal))
     );
     const alphaUpperBound = Math.min(...alphaUpperBounds);
     return {
