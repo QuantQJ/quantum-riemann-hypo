@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, AlertCircle, ChartLine, AlertTriangle } from "@phosphor-icons/react";
+import { CheckCircle, AlertCircle, TrendingUp, AlertTriangle } from "@phosphor-icons/react";
 import { SimulationRunner } from "@/components/SimulationRunner";
 
 export function VerificationSection() {
@@ -76,7 +76,7 @@ export function VerificationSection() {
       case "warning":
         return <AlertCircle className="text-yellow-600" size={20} />;
       default:
-        return <ChartLine className="text-gray-600" size={20} />;
+        return <TrendingUp className="text-gray-600" size={20} />;
     }
   };
 
@@ -438,7 +438,7 @@ export function VerificationSection() {
 
             <Card className="p-4 bg-blue-50 border-blue-200">
               <div className="flex items-center gap-2 mb-3">
-                <ChartLine className="text-blue-600" size={20} />
+                <TrendingUp className="text-blue-600" size={20} />
                 <h3 className="font-semibold text-blue-800">SUSY Validation</h3>
               </div>
               <p className="text-sm text-blue-700">

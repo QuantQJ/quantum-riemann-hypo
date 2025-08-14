@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Atom, Calculator, ChartLine, Lightning, CheckCircle, Target } from "@phosphor-icons/react";
+import { Atom, Calculator, TrendingUp, Lightning, CheckCircle, Target } from "@phosphor-icons/react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
 
 const demoResults = [
@@ -18,7 +18,7 @@ const keyFindings = [
     title: "Spectral Tautology",
     value: "ρ = 0.999",
     description: "Gödelian loop: zeros define spectrum that locates zeros",
-    icon: <ChartLine size={20} />,
+    icon: <TrendingUp size={20} />,
     color: "text-primary"
   },
   {
@@ -363,7 +363,7 @@ export function OverviewSection({ onSectionChange }: OverviewSectionProps = {}) 
               </div>
             </Button>
             <Button variant="outline" className="justify-start" size="lg" onClick={() => onSectionChange?.('parameters')}>
-              <ChartLine className="mr-2" size={16} />
+              <TrendingUp className="mr-2" size={16} />
               <div className="text-left">
                 <div className="font-medium">Parameters</div>
                 <div className="text-xs text-muted-foreground">Contraction bounds</div>
