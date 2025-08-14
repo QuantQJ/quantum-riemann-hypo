@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Lightning, FlaskConical, Target, TrendUp, CheckCircle, AlertTriangle } from "@phosphor-icons/react";
+import { Lightning, FlaskConical, Target, ChartLine, CheckCircle, AlertTriangle } from "@phosphor-icons/react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ScatterChart, Scatter } from 'recharts';
 import { MathJax, MathJaxContext } from '@/components/MathJax';
 import { useState, useEffect } from 'react';
@@ -134,7 +134,7 @@ export function SusySection() {
               Potentials
             </TabsTrigger>
             <TabsTrigger value="mirroring" className="flex items-center gap-1">
-              <TrendUp size={14} />
+              <ChartLine size={14} />
               Mirroring
             </TabsTrigger>
             <TabsTrigger value="witten" className="flex items-center gap-1">
@@ -335,7 +335,7 @@ export function SusySection() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendUp size={20} />
+                  <ChartLine size={20} />
                   Spectral Mirroring Analysis
                 </CardTitle>
               </CardHeader>

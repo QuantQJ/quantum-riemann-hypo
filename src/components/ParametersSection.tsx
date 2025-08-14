@@ -4,7 +4,7 @@ import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Activity, TrendUp, Lightning, AlertTriangle, Calculator } from '@phosphor-icons/react';
+import { Activity, ChartLine, Lightning, AlertTriangle, Calculator } from '@phosphor-icons/react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ConvergenceAnalysis } from '@/components/ConvergenceAnalysis';
 
@@ -141,7 +141,7 @@ export function ParametersSection() {
       return { 
         status: 'Contractive', 
         color: 'bg-green-500', 
-        icon: <TrendUp size={16} />,
+        icon: <ChartLine size={16} />,
         description: 'Theorem 3: Linear convergence guaranteed'
       };
     } else {
