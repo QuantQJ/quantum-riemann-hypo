@@ -9,6 +9,7 @@ import { VerificationSection } from "@/components/VerificationSection";
 import { ZeroVisualization } from "@/components/ZeroVisualization";
 import { MathematicalWorkbench } from "@/components/MathematicalWorkbench";
 import { AboutSection } from "@/components/AboutSection";
+import { ShareSection } from "@/components/ShareSection";
 import { Toaster } from "@/components/ui/sonner";
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         return <ZeroVisualization key="visualization" />;
       case "workbench":
         return <MathematicalWorkbench key="workbench" />;
+      case "share":
+        return <ShareSection key="share" />;
       case "about":
         return <AboutSection key="about" />;
       default:

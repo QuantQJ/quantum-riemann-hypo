@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import App from './App.tsx';
 
 // Error Fallback Component
-function ErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
+function ErrorFallback({ error }: { error: Error }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-8">
       <div className="max-w-md w-full text-center space-y-4">
@@ -21,15 +21,16 @@ function ErrorFallback({ error, resetErrorBoundary }: { error: Error; resetError
           className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
           onClick={() => window.location.reload()} 
         >
-          Reload page
+          Reload Page
         </button>
       </div>
     </div>
   );
 }
 
-createRoot(document.getElementById('root')!).render(
+const root = createRoot(document.getElementById('root')!);
+root.render(
   <ErrorBoundary FallbackComponent={ErrorFallback}>
     <App />
   </ErrorBoundary>
-)
+);
