@@ -219,7 +219,7 @@ button, .button {
   .main-grid {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
   }
   
   .navigation-container {
@@ -229,14 +229,15 @@ button, .button {
     right: 0;
     background: var(--background);
     border-bottom: 1px solid var(--border);
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     z-index: 50;
     max-height: none;
     overflow: visible;
+    box-shadow: 0 2px 8px -2px oklch(0.25 0.15 260 / 0.1);
   }
   
   .content-container {
-    margin-top: 200px; /* Increased space for fixed navigation */
+    margin-top: 130px; /* Consistent space for fixed navigation */
     padding: 1.5rem;
     width: 100%;
     max-width: 100%;
@@ -333,6 +334,17 @@ button, .button {
   transition: all 0.2s ease-out;
 }
 
+/* Scale hover effects for interactive elements */
+.hover:scale-102:hover {
+  transform: scale(1.02);
+  transition: transform 0.15s ease-out;
+}
+
+.hover:scale-105:hover {
+  transform: scale(1.05);
+  transition: transform 0.15s ease-out;
+}
+
 /* Enhanced grid layout with proper constraints */
 .main-grid {
   display: grid;
@@ -392,14 +404,9 @@ button, .button {
   border: 1px solid oklch(0.88 0.01 260 / 0.3);
 }
 
-/* Clean, professional background with subtle depth */
+/* Clean, professional background with very subtle depth */
 .research-gradient {
-  background: linear-gradient(135deg, 
-    oklch(0.999 0.001 240) 0%,
-    oklch(0.998 0.002 260) 30%,
-    oklch(0.997 0.003 280) 70%,
-    oklch(0.999 0.001 300) 100%
-  );
+  background: var(--background);
   position: relative;
   overflow: hidden;
 }
@@ -413,34 +420,34 @@ button, .button {
   bottom: 0;
   background: radial-gradient(
     ellipse at 30% 20%,
-    oklch(0.25 0.15 260 / 0.02) 0%,
-    transparent 50%
+    oklch(0.25 0.15 260 / 0.005) 0%,
+    transparent 70%
   ),
   radial-gradient(
     ellipse at 70% 80%,
-    oklch(0.65 0.25 35 / 0.015) 0%,
-    transparent 50%
+    oklch(0.65 0.25 35 / 0.003) 0%,
+    transparent 70%
   );
   pointer-events: none;
-  animation: quantum-flow 90s ease-in-out infinite;
+  animation: quantum-flow 120s ease-in-out infinite;
 }
 
 @keyframes quantum-flow {
   0%, 100% {
-    opacity: 0.15;
+    opacity: 0.03;
     transform: translateX(0) translateY(0) scale(1);
   }
   25% {
-    opacity: 0.08;
-    transform: translateX(2px) translateY(-1px) scale(1.001);
+    opacity: 0.01;
+    transform: translateX(1px) translateY(-0.5px) scale(1.0005);
   }
   50% {
-    opacity: 0.2;
-    transform: translateX(-1px) translateY(2px) scale(0.999);
+    opacity: 0.05;
+    transform: translateX(-0.5px) translateY(1px) scale(0.9995);
   }
   75% {
-    opacity: 0.1;
-    transform: translateX(-2px) translateY(-1px) scale(1.001);
+    opacity: 0.02;
+    transform: translateX(-1px) translateY(-0.5px) scale(1.0005);
   }
 }
 
@@ -542,14 +549,15 @@ button, .button {
     right: 0;
     background: var(--background);
     border-bottom: 1px solid var(--border);
-    padding: 1rem;
+    padding: 0.75rem;
     z-index: 50;
     max-height: auto;
+    box-shadow: 0 2px 8px -2px oklch(0.25 0.15 260 / 0.1);
   }
   
   .content-container {
     padding: 1rem;
-    margin-top: 200px; /* Increased space for fixed navigation */
+    margin-top: 140px; /* Reduced space for more compact navigation */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -582,14 +590,15 @@ button, .button {
     right: 0;
     background: var(--background);
     border-bottom: 1px solid var(--border);
-    padding: 1.5rem;
+    padding: 1rem;
     z-index: 50;
     max-height: auto;
+    box-shadow: 0 2px 8px -2px oklch(0.25 0.15 260 / 0.1);
   }
   
   .content-container {
-    padding: 2rem;
-    margin-top: 200px; /* Increased space for fixed navigation */
+    padding: 1.5rem;
+    margin-top: 120px; /* Adjusted for tablet navigation height */
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;

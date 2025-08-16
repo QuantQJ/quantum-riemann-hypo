@@ -91,20 +91,27 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
     </nav>
   );
 
+  const handleGroupChange = (group: string) => {
+    const groupSections = sectionGroups[group as keyof typeof sectionGroups];
+    if (groupSections && groupSections.sections.length > 0) {
+      onSectionChange(groupSections.sections[0].id);
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Mobile/Tablet: Horizontal scrollable tabs */}
       <div className="block lg:hidden">
-        <Card className="quantum-gradient p-4 mb-4">
-          <div className="mb-4">
-            <h2 className="text-lg font-bold text-primary mb-1">Quantum Riemann Research</h2>
+        <Card className="quantum-gradient p-3 mb-4">
+          <div className="mb-3">
+            <h2 className="text-base font-bold text-primary mb-1">Quantum Riemann Research</h2>
             <p className="text-xs text-muted-foreground">
               A computational approach to the Riemann Hypothesis
             </p>
           </div>
           
-          <div className="overflow-x-auto pb-2">
-            <div className="flex gap-2 min-w-max">
+          <div className="overflow-x-auto pb-2 -mx-1">
+            <div className="flex gap-1.5 min-w-max px-1">
               {sections.map((section) => {
                 const Icon = section.icon;
                 const isActive = activeSection === section.id;
@@ -113,15 +120,16 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
                     key={section.id}
                     variant={isActive ? "default" : "outline"}
                     size="sm"
-                    className={`flex items-center gap-2 px-3 py-2 text-sm whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs whitespace-nowrap transition-all ${
                       isActive 
-                        ? "bg-primary text-primary-foreground shadow-md" 
-                        : "hover:bg-secondary/50"
+                        ? "bg-primary text-primary-foreground shadow-md scale-105" 
+                        : "hover:bg-secondary/50 hover:scale-102"
                     }`}
                     onClick={() => onSectionChange(section.id)}
                   >
-                    <Icon size={16} />
-                    <span>{section.title}</span>
+                    <Icon size={14} />
+                    <span className="hidden sm:inline">{section.title}</span>
+                    <span className="sm:hidden">{section.title.split(' ')[0]}</span>
                   </Button>
                 );
               })}
@@ -132,7 +140,7 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
 
       {/* Desktop: Vertical grouped navigation */}
       <div className="hidden lg:block">
-        <Card className="p-4 w-full">
+        <Card className="p-4 w-full max-w-[280px]">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-primary">Navigation</h2>
             <Badge variant="outline" className="text-xs">
@@ -140,22 +148,25 @@ export function Navigation({ activeSection, onSectionChange }: NavigationProps) 
             </Badge>
           </div>
           
-          <Tabs value={currentGroup} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-4">
-              <TabsTrigger value="theory" className="text-xs">Theory</TabsTrigger>
-              <TabsTrigger value="analysis" className="text-xs">Analysis</TabsTrigger>
-              <TabsTrigger value="tools" className="text-xs">Tools</TabsTrigger>
+          <Tabs value={currentGroup} onValueChange={handleGroupChange} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-4 h-8">
+              <TabsTrigger value="theory" className="text-xs py-1">Theory</TabsTrigger>
+              <TabsTrigger value="analysis" className="text-xs py-1">Analysis</TabsTrigger>
+              <TabsTrigger value="tools" className="text-xs py-1">Tools</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="theory" className="mt-0">
+            <TabsContent value="theory" className="mt-0 space-y-2">
+              <div className="text-xs text-muted-foreground mb-2 px-1">Mathematical Framework</div>
               {renderSectionGroup(sectionGroups.theory.sections)}
             </TabsContent>
 
-            <TabsContent value="analysis" className="mt-0">
+            <TabsContent value="analysis" className="mt-0 space-y-2">
+              <div className="text-xs text-muted-foreground mb-2 px-1">Data & Validation</div>
               {renderSectionGroup(sectionGroups.analysis.sections)}
             </TabsContent>
 
-            <TabsContent value="tools" className="mt-0">
+            <TabsContent value="tools" className="mt-0 space-y-2">
+              <div className="text-xs text-muted-foreground mb-2 px-1">Interactive Resources</div>
               {renderSectionGroup(sectionGroups.tools.sections)}
             </TabsContent>
           </Tabs>

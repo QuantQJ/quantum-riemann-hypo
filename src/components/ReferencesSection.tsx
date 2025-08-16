@@ -1,15 +1,184 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, BookOpen, FileText, User } from "@phosphor-icons/react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { ExternalLink, BookOpen, FileText, User, Download, Copy, Share } from "@phosphor-icons/react";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export function ReferencesSection() {
+  const [selectedRefs, setSelectedRefs] = useState<string[]>([]);
+  const [citationFormat, setCitationFormat] = useState("apa");
+  const [generatedCitation, setGeneratedCitation] = useState("");
+
   const handleAddReference = () => {
     const reference = prompt("Enter reference in format: Author(s). (Year). Title. Journal/Source.");
     if (reference) {
       // In a real app, this would be saved to state/database
-      alert(`Reference added: ${reference}`);
+      toast.success(`Reference added: ${reference}`);
     }
+  };
+
+  const toggleRefSelection = (refId: string) => {
+    setSelectedRefs(prev => 
+      prev.includes(refId) 
+        ? prev.filter(id => id !== refId)
+        : [...prev, refId]
+    );
+  };
+
+  const selectAllRefs = () => {
+    setSelectedRefs(references.map(ref => ref.id));
+  };
+
+  const clearSelection = () => {
+    setSelectedRefs([]);
+  };
+
+  const formatCitationStyle = (ref: any, style: string) => {
+    const authors = formatAuthors(ref.authors);
+    const year = ref.year;
+    const title = ref.title;
+    const journal = ref.journal;
+    const volume = ref.volume;
+    const pages = ref.pages;
+    const doi = ref.doi;
+    const url = ref.url;
+
+    switch (style) {
+      case "apa":
+        let apa = `${authors} (${year}). ${title}.`;
+        if (journal) {
+          apa += ` *${journal}*`;
+          if (volume) apa += `, *${volume}*`;
+          if (pages) apa += `, ${pages}`;
+        }
+        if (doi) apa += ` https://doi.org/${doi}`;
+        else if (url) apa += ` ${url}`;
+        return apa;
+
+      case "mla":
+        let mla = `${authors}. "${title}."`;
+        if (journal) {
+          mla += ` *${journal}*`;
+          if (volume) mla += `, vol. ${volume}`;
+          if (year) mla += `, ${year}`;
+          if (pages) mla += `, pp. ${pages}`;
+        }
+        if (url) mla += ` Web.`;
+        return mla;
+
+      case "chicago":
+        let chicago = `${authors}. "${title}."`;
+        if (journal) {
+          chicago += ` *${journal}*`;
+          if (volume) chicago += ` ${volume}`;
+          if (year) chicago += ` (${year})`;
+          if (pages) chicago += `: ${pages}`;
+        }
+        if (doi) chicago += `. https://doi.org/${doi}`;
+        return chicago;
+
+      case "bibtex":
+        const id = ref.id;
+        let bibtex = `@article{${id},\n`;
+        bibtex += `  title={${title}},\n`;
+        bibtex += `  author={${ref.authors.join(' and ')}},\n`;
+        if (journal) bibtex += `  journal={${journal}},\n`;
+        if (volume) bibtex += `  volume={${volume}},\n`;
+        if (pages) bibtex += `  pages={${pages}},\n`;
+        bibtex += `  year={${year}},\n`;
+        if (ref.publisher) bibtex += `  publisher={${ref.publisher}},\n`;
+        if (doi) bibtex += `  doi={${doi}},\n`;
+        if (url) bibtex += `  url={${url}},\n`;
+        bibtex += `}`;
+        return bibtex;
+
+      case "endnote":
+        let endnote = `%0 Journal Article\n`;
+        endnote += `%T ${title}\n`;
+        ref.authors.forEach((author: string) => {
+          endnote += `%A ${author}\n`;
+        });
+        if (journal) endnote += `%J ${journal}\n`;
+        if (volume) endnote += `%V ${volume}\n`;
+        if (pages) endnote += `%P ${pages}\n`;
+        endnote += `%D ${year}\n`;
+        if (doi) endnote += `%R ${doi}\n`;
+        if (url) endnote += `%U ${url}\n`;
+        return endnote;
+
+      default:
+        return formatCitation(ref);
+    }
+  };
+
+  const generateBibliography = () => {
+    const selectedReferences = references.filter(ref => selectedRefs.includes(ref.id));
+    if (selectedReferences.length === 0) {
+      toast.error("Please select at least one reference");
+      return;
+    }
+
+    const bibliography = selectedReferences
+      .map(ref => formatCitationStyle(ref, citationFormat))
+      .join('\n\n');
+    
+    setGeneratedCitation(bibliography);
+    toast.success(`Bibliography generated with ${selectedReferences.length} references`);
+  };
+
+  const copyToClipboard = async () => {
+    if (!generatedCitation) {
+      toast.error("No bibliography generated yet");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(generatedCitation);
+      toast.success("Bibliography copied to clipboard!");
+    } catch (err) {
+      toast.error("Failed to copy to clipboard");
+    }
+  };
+
+  const downloadBibliography = () => {
+    if (!generatedCitation) {
+      toast.error("No bibliography generated yet");
+      return;
+    }
+
+    const blob = new Blob([generatedCitation], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = `riemann_bibliography_${citationFormat}.${citationFormat === 'bibtex' ? 'bib' : 'txt'}`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    toast.success("Bibliography downloaded!");
+  };
+
+  const exportCurrentWork = () => {
+    const currentWork = {
+      title: "Quantum Simulation of Riemann Zeta Zeros via Feedback Hamiltonian Control and SUSY QM",
+      authors: ["James [Your Name]"],
+      year: new Date().getFullYear(),
+      journal: "Interactive Mathematical Research Platform",
+      category: "Computational Mathematics",
+      description: "Novel quantum mechanical approach to verifying the Riemann Hypothesis through spectral feedback control and supersymmetric quantum mechanics.",
+      note: "Available online",
+      url: window.location.origin
+    };
+
+    const citation = formatCitationStyle(currentWork, citationFormat);
+    setGeneratedCitation(citation);
+    toast.success("Citation for this work generated!");
   };
   const references = [
     {
@@ -250,11 +419,163 @@ export function ReferencesSection() {
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Academic sources, mathematical references, and research foundations for the quantum Riemann approach
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-3">
             <Button onClick={handleAddReference} className="flex items-center gap-2">
               <FileText size={16} />
               Add Reference
             </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Download size={16} />
+                  Export Citations
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-2">
+                    <Share size={24} />
+                    Citation Export Tool
+                  </DialogTitle>
+                  <DialogDescription>
+                    Generate formatted bibliographies in multiple citation styles
+                  </DialogDescription>
+                </DialogHeader>
+                
+                <Tabs defaultValue="select" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="select">Select References</TabsTrigger>
+                    <TabsTrigger value="format">Format Citations</TabsTrigger>
+                    <TabsTrigger value="export">Export Bibliography</TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="select" className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg font-semibold">Select References ({selectedRefs.length} selected)</h3>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" onClick={selectAllRefs}>
+                          Select All
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={clearSelection}>
+                          Clear All
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="grid gap-3 max-h-96 overflow-y-auto">
+                      {references.map((ref) => (
+                        <div
+                          key={ref.id}
+                          className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                            selectedRefs.includes(ref.id)
+                              ? 'border-primary bg-primary/5'
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                          onClick={() => toggleRefSelection(ref.id)}
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="space-y-1">
+                              <h4 className="font-medium text-sm">{ref.title}</h4>
+                              <p className="text-xs text-muted-foreground">
+                                {formatAuthors(ref.authors)} ({ref.year})
+                              </p>
+                              <Badge className={getCategoryColor(ref.category)} size="sm">
+                                {ref.category}
+                              </Badge>
+                            </div>
+                            <div className={`w-4 h-4 border-2 rounded ${
+                              selectedRefs.includes(ref.id)
+                                ? 'bg-primary border-primary'
+                                : 'border-muted-foreground'
+                            }`}>
+                              {selectedRefs.includes(ref.id) && (
+                                <div className="w-full h-full bg-primary-foreground rounded-sm scale-50" />
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="format" className="space-y-4">
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium">Citation Format</label>
+                        <Select value={citationFormat} onValueChange={setCitationFormat}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select citation format" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="apa">APA Style</SelectItem>
+                            <SelectItem value="mla">MLA Style</SelectItem>
+                            <SelectItem value="chicago">Chicago Style</SelectItem>
+                            <SelectItem value="bibtex">BibTeX</SelectItem>
+                            <SelectItem value="endnote">EndNote</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        <Button onClick={generateBibliography} className="flex items-center gap-2">
+                          <FileText size={16} />
+                          Generate Bibliography
+                        </Button>
+                        <Button variant="outline" onClick={exportCurrentWork} className="flex items-center gap-2">
+                          <Share size={16} />
+                          Cite This Work
+                        </Button>
+                      </div>
+                      
+                      {generatedCitation && (
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Generated Citations</label>
+                          <Textarea
+                            value={generatedCitation}
+                            onChange={(e) => setGeneratedCitation(e.target.value)}
+                            className="min-h-40 font-mono text-xs"
+                            placeholder="Generated bibliography will appear here..."
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="export" className="space-y-4">
+                    <div className="text-center space-y-4">
+                      <div className="p-4 border rounded-lg bg-muted/50">
+                        <h3 className="font-semibold mb-2">Export Options</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          Copy to clipboard or download your formatted bibliography
+                        </p>
+                        
+                        <div className="flex justify-center gap-3">
+                          <Button onClick={copyToClipboard} className="flex items-center gap-2">
+                            <Copy size={16} />
+                            Copy to Clipboard
+                          </Button>
+                          <Button variant="outline" onClick={downloadBibliography} className="flex items-center gap-2">
+                            <Download size={16} />
+                            Download File
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="text-left space-y-2">
+                        <h4 className="font-medium">Quick Citation for This Work:</h4>
+                        <div className="mathematical-content p-3">
+                          <p className="font-mono text-xs">
+                            James [Your Name] ({new Date().getFullYear()}). Quantum Simulation of Riemann Zeta Zeros via 
+                            Feedback Hamiltonian Control and SUSY QM. <em>Interactive Mathematical Research Platform</em>. 
+                            Available at: {window.location.origin}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 
@@ -312,22 +633,32 @@ export function ReferencesSection() {
                       <span className="font-medium">{ref.year}</span>
                     </div>
                   </div>
-                  {(ref.doi || ref.url) && (
+                  <div className="flex gap-2">
                     <Button
-                      variant="outline" 
+                      variant="outline"
                       size="sm"
-                      className="shrink-0"
-                      asChild
+                      onClick={() => toggleRefSelection(ref.id)}
+                      className={selectedRefs.includes(ref.id) ? 'bg-primary text-primary-foreground' : ''}
                     >
-                      <a 
-                        href={ref.doi ? `https://doi.org/${ref.doi}` : ref.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink size={16} />
-                      </a>
+                      {selectedRefs.includes(ref.id) ? 'Selected' : 'Select'}
                     </Button>
-                  )}
+                    {(ref.doi || ref.url) && (
+                      <Button
+                        variant="outline" 
+                        size="sm"
+                        className="shrink-0"
+                        asChild
+                      >
+                        <a 
+                          href={ref.doi ? `https://doi.org/${ref.doi}` : ref.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -356,6 +687,24 @@ export function ReferencesSection() {
                     )}
                   </p>
                 </div>
+                
+                {/* Quick citation preview */}
+                <details className="group">
+                  <summary className="cursor-pointer text-sm text-primary hover:text-primary/80 flex items-center gap-2">
+                    <span>Quick Citation Formats</span>
+                    <span className="group-open:rotate-90 transition-transform">▶</span>
+                  </summary>
+                  <div className="mt-2 space-y-2 p-3 bg-muted/50 rounded-lg">
+                    <div>
+                      <strong className="text-xs text-muted-foreground">APA:</strong>
+                      <p className="text-xs font-mono mt-1">{formatCitationStyle(ref, 'apa')}</p>
+                    </div>
+                    <div>
+                      <strong className="text-xs text-muted-foreground">BibTeX:</strong>
+                      <pre className="text-xs font-mono mt-1 overflow-x-auto">{formatCitationStyle(ref, 'bibtex')}</pre>
+                    </div>
+                  </div>
+                </details>
               </CardContent>
             </Card>
           ))}
@@ -399,19 +748,60 @@ export function ReferencesSection() {
         {/* Citation Information */}
         <Card className="border-2 border-accent/20">
           <CardHeader>
-            <CardTitle className="text-accent">How to Cite This Work</CardTitle>
+            <CardTitle className="text-accent flex items-center gap-2">
+              <Share size={24} />
+              How to Cite This Work
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <div className="mathematical-content">
               <p className="font-mono text-sm">
-                [Author Names] (2024). "Quantum Simulation of Riemann Zeta Zeros via 
-                Feedback Hamiltonian Control and SUSY QM." <em>Interactive Mathematical Research</em>. 
-                Available at: [URL]
+                James [Your Name] (2024). "Quantum Simulation of Riemann Zeta Zeros via 
+                Feedback Hamiltonian Control and SUSY QM." <em>Interactive Mathematical Research Platform</em>. 
+                Available at: {window.location.origin}
               </p>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              BibTeX and other citation formats available upon request. This work is released under 
-              an open-access license for the advancement of mathematical research.
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-medium mb-2">BibTeX Entry:</h4>
+                <div className="mathematical-content">
+                  <pre className="text-xs">{`@misc{riemann_quantum_2024,
+  title={Quantum Simulation of Riemann Zeta Zeros via Feedback Hamiltonian Control and SUSY QM},
+  author={James [Your Name]},
+  year={2024},
+  howpublished={Interactive Research Platform},
+  url={${window.location.origin}},
+  note={Online; accessed ${new Date().toLocaleDateString()}}
+}`}</pre>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="font-medium mb-2">DOI Registration:</h4>
+                <p className="text-sm text-muted-foreground">
+                  This work is being prepared for formal publication. A DOI will be assigned upon 
+                  submission to a peer-reviewed journal. For now, please use the URL citation format.
+                </p>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="mt-2"
+                  onClick={() => {
+                    const citation = `James [Your Name] (2024). Quantum Simulation of Riemann Zeta Zeros via Feedback Hamiltonian Control and SUSY QM. Interactive Mathematical Research Platform. Available at: ${window.location.origin}`;
+                    navigator.clipboard.writeText(citation);
+                    toast.success("Citation copied to clipboard!");
+                  }}
+                >
+                  <Copy size={16} className="mr-2" />
+                  Copy Citation
+                </Button>
+              </div>
+            </div>
+            
+            <p className="text-sm text-muted-foreground">
+              This work is released under an open-access license for the advancement of mathematical research.
+              All code, visualizations, and mathematical derivations are available for academic use with proper attribution.
             </p>
           </CardContent>
         </Card>
