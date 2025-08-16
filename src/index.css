@@ -392,14 +392,13 @@ button, .button {
   border: 1px solid oklch(0.88 0.01 260 / 0.3);
 }
 
-/* Clean, professional quantum-inspired background */
+/* Clean, professional background with subtle depth */
 .research-gradient {
   background: linear-gradient(135deg, 
-    oklch(0.998 0.002 240) 0%,
-    oklch(0.996 0.003 260) 25%,
-    oklch(0.995 0.004 280) 50%,
-    oklch(0.997 0.002 300) 75%,
-    oklch(0.998 0.001 320) 100%
+    oklch(0.999 0.001 240) 0%,
+    oklch(0.998 0.002 260) 30%,
+    oklch(0.997 0.003 280) 70%,
+    oklch(0.999 0.001 300) 100%
   );
   position: relative;
   overflow: hidden;
@@ -412,38 +411,36 @@ button, .button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    oklch(0.25 0.15 260 / 0.008) 35%,
-    transparent 50%,
-    oklch(0.65 0.25 35 / 0.012) 85%,
-    transparent 100%
+  background: radial-gradient(
+    ellipse at 30% 20%,
+    oklch(0.25 0.15 260 / 0.02) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at 70% 80%,
+    oklch(0.65 0.25 35 / 0.015) 0%,
+    transparent 50%
   );
   pointer-events: none;
-  animation: quantum-flow 60s ease-in-out infinite;
+  animation: quantum-flow 90s ease-in-out infinite;
 }
 
 @keyframes quantum-flow {
   0%, 100% {
-    opacity: 0.3;
-    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
-  }
-  20% {
     opacity: 0.15;
-    transform: translateX(5px) translateY(-3px) scale(1.003) rotate(0.5deg);
+    transform: translateX(0) translateY(0) scale(1);
   }
-  40% {
-    opacity: 0.4;
-    transform: translateX(-3px) translateY(5px) scale(0.997) rotate(-0.3deg);
+  25% {
+    opacity: 0.08;
+    transform: translateX(2px) translateY(-1px) scale(1.001);
   }
-  60% {
+  50% {
     opacity: 0.2;
-    transform: translateX(-5px) translateY(-3px) scale(1.002) rotate(0.2deg);
+    transform: translateX(-1px) translateY(2px) scale(0.999);
   }
-  80% {
-    opacity: 0.35;
-    transform: translateX(3px) translateY(4px) scale(0.998) rotate(-0.1deg);
+  75% {
+    opacity: 0.1;
+    transform: translateX(-2px) translateY(-1px) scale(1.001);
   }
 }
 

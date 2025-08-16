@@ -257,10 +257,6 @@ export function ReferencesSection() {
             </Button>
           </div>
         </div>
-            A comprehensive bibliography spanning the historical development, theoretical foundations, 
-            and modern computational approaches to the Riemann Hypothesis and related mathematical physics.
-          </p>
-        </div>
 
         {/* Category Filter */}
         <Card className="quantum-gradient">
